@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Login</title>
+    <base href="/">
+</head>
+
+<body>
+<div id="header" class="header">
+    <a href="/home" style="text-decoration: none"><p>Fitness club</p></a>
+</div>
+
+<div class="nav navbar">
+    <ul class="topmenu">
+        <li><a href="/home">Главная</a></li>
+    </ul>
+</div>
+
+
+<br/><br/>
+<h1> Войти </h1>
+<form method="post">
+    <div align="center">
+        <input name="username" placeholder='Ваш логин' type="text">
+        <input name="password" placeholder='Ваш пароль' type='password'>
+        <div>
+            <button class="button button1">Войти</button>
+        </div>
+        <p th:each="message:${errorList}" th:text="${message}"></p>
+    </div>
+</form>
+
+
+</body>
+
+</html>

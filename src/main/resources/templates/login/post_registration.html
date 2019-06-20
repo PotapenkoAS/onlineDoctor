@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Registration</title>
+</head>
+
+<body>
+
+
+<div align="center">
+    <br/><br/>
+    <h1> Регистрация </h1>
+    <form method="post">
+        <div class="reg" th:align="center">
+            <input name="login" hidden th:value="${user.login}">
+            <input name="password" hidden th:value="${user.password}">
+            <input name="surname" placeholder='Фамилия' type="text">
+            <input name="name" placeholder='Имя' type='text'>
+            <input name="patronymic" placeholder='Отчество' type='text'>
+            <input name="age" placeholder='Возраст' type='number'>
+            <input name="weight" placeholder='Вес' type='text'>
+            <input name="height" placeholder='Рост' type='number'>
+            <select name="sex">
+                <option value="1" selected>Муж</option>
+                <option value="0">Жен</option>
+            </select>
+            <div>
+                <button class="button button1">Зарегистрироваться</button>
+            </div>
+        </div>
+    </form>
+    <table>
+        <tr th:each="message:${errorList}">
+            <td th:text="${message}">.</td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+
+</html>
