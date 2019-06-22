@@ -87,3 +87,9 @@ create table test
 alter table test
 	add constraint test_client_client_id_fk
 		foreign key (client_id) references client (client_id);
+
+alter table user modify login VARCHAR(255) not null;
+
+alter table user modify password varchar(255) not null;
+
+alter table user modify role VARCHAR(255) not null;

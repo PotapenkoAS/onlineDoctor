@@ -1,5 +1,6 @@
 package com.vlsu.demo.model.entity;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +19,7 @@ public class User {
     private Client clientByUserId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     public int getUserId() {
         return userId;

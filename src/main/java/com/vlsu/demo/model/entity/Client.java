@@ -19,6 +19,7 @@ public class Client {
     private Collection<Test> testsByClientId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "client_id")
     public int getClientId() {
         return clientId;

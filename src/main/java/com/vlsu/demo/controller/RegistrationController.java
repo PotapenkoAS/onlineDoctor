@@ -65,7 +65,7 @@ public class RegistrationController {
         ArrayList<String> errorList = regService.saveClient(client, user);
         if (errorList.isEmpty()) {
             loginService.login(user);
-            return "redirect:/client/"+user.getUserId();
+            return "redirect:/test";
         }
         model.addAttribute("errorList", errorList);
         model.addAttribute("user", new User(login, password, "CLIENT"));
