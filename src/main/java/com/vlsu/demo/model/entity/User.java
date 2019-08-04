@@ -1,6 +1,5 @@
 package com.vlsu.demo.model.entity;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 public class User {
-    private int userId;
+    private Long userId;
     @Size(min = 6, max = 50, message = "Длина логина от 6 до 50 символов")
     @NotNull(message = "Логин не может быть пустым")
     private String login;
@@ -21,11 +20,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -64,7 +63,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId &&
+        return userId.equals(user.userId) &&
                 login.equals(user.login) &&
                 password.equals(user.password) &&
                 role.equals(user.role);

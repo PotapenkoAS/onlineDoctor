@@ -7,33 +7,44 @@ import java.util.Objects;
 
 @Entity
 @IdClass(DiseaseSymptomKey.class)
-@Table(name = "disease_symptom", schema = "onlinedoctor")
+@Table(name = "disease_symptom", schema = "online_doctor")
 public class DiseaseSymptom {
-    private int diseaseId;
-    private int symptomId;
+    private Long diseaseId;
+    private Long symptomId;
     private Disease diseaseByDiseaseId;
     private Symptom symptomBySymptomId;
+    private Long rate;
 
     @Basic
     @Id
     @Column(name = "disease_id")
-    public int getDiseaseId() {
+    public Long getDiseaseId() {
         return diseaseId;
     }
 
-    public void setDiseaseId(int diseaseId) {
+    public void setDiseaseId(Long diseaseId) {
         this.diseaseId = diseaseId;
     }
 
     @Basic
     @Id
     @Column(name = "symptom_id")
-    public int getSymptomId() {
+    public Long getSymptomId() {
         return symptomId;
     }
 
-    public void setSymptomId(int symptomId) {
+    public void setSymptomId(Long symptomId) {
         this.symptomId = symptomId;
+    }
+
+    @Basic
+    @Column(name = "rate")
+    public Long getRate() {
+        return rate;
+    }
+
+    public void setRate(Long rate) {
+        this.rate = rate;
     }
 
     @Override
@@ -41,8 +52,8 @@ public class DiseaseSymptom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiseaseSymptom that = (DiseaseSymptom) o;
-        return diseaseId == that.diseaseId &&
-                symptomId == that.symptomId;
+        return diseaseId.equals(that.diseaseId) &&
+                symptomId.equals(that.symptomId);
     }
 
     @Override
@@ -69,4 +80,6 @@ public class DiseaseSymptom {
     public void setSymptomBySymptomId(Symptom symptomBySymptomId) {
         this.symptomBySymptomId = symptomBySymptomId;
     }
+
+
 }

@@ -7,33 +7,44 @@ import java.util.Objects;
 
 @Entity
 @IdClass(DiseaseMedKey.class)
-@Table(name = "disease_med", schema = "onlinedoctor")
+@Table(name = "disease_med", schema = "online_doctor")
 public class DiseaseMed {
-    private int diseaseId;
-    private Integer medicamentId;
+    private Long diseaseId;
+    private Long medicamentId;
     private Disease diseaseByDiseaseId;
     private Medicament medicamentByMedicamentId;
+    private Long rate;
 
     @Basic
     @Id
     @Column(name = "disease_id")
-    public int getDiseaseId() {
+    public Long getDiseaseId() {
         return diseaseId;
     }
 
-    public void setDiseaseId(int diseaseId) {
+    public void setDiseaseId(Long diseaseId) {
         this.diseaseId = diseaseId;
     }
 
     @Basic
     @Id
     @Column(name = "medicament_id")
-    public Integer getMedicamentId() {
+    public Long getMedicamentId() {
         return medicamentId;
     }
 
-    public void setMedicamentId(Integer medicamentId) {
+    public void setMedicamentId(Long medicamentId) {
         this.medicamentId = medicamentId;
+    }
+
+    @Basic
+    @Column(name = "rate")
+    public Long getRate() {
+        return rate;
+    }
+
+    public void setRate(Long rate) {
+        this.rate = rate;
     }
 
     @Override
@@ -41,7 +52,7 @@ public class DiseaseMed {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiseaseMed that = (DiseaseMed) o;
-        return diseaseId == that.diseaseId &&
+        return diseaseId.equals(that.diseaseId) &&
                 Objects.equals(medicamentId, that.medicamentId);
     }
 
@@ -69,4 +80,6 @@ public class DiseaseMed {
     public void setMedicamentByMedicamentId(Medicament medicamentByMedicamentId) {
         this.medicamentByMedicamentId = medicamentByMedicamentId;
     }
+
+
 }

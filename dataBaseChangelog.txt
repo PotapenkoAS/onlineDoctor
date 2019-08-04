@@ -35,6 +35,12 @@ create table admin
 	user_id int not null
 );
 
+alter table admin
+	add constraint admin_user_user_id_fk
+		foreign key (user_id) references user (user_id);
+
+
+
 alter table recordds modify Id_RecordDS int not null;
 
 alter table recordds drop primary key;
@@ -93,3 +99,9 @@ alter table user modify login VARCHAR(255) not null;
 alter table user modify password varchar(255) not null;
 
 alter table user modify role VARCHAR(255) not null;
+
+alter table disease_symptom
+	add rate int not null;
+
+alter table disease_med
+	add rate int not null;

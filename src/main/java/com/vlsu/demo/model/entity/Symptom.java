@@ -6,18 +6,18 @@ import java.util.Objects;
 
 @Entity
 public class Symptom {
-    private int symptomId;
+    private Long symptomId;
     private String name;
     private String info;
     private Collection<DiseaseSymptom> diseaseSymptomsBySymptomId;
 
     @Id
     @Column(name = "symptom_id")
-    public int getSymptomId() {
+    public Long getSymptomId() {
         return symptomId;
     }
 
-    public void setSymptomId(int symptomId) {
+    public void setSymptomId(Long symptomId) {
         this.symptomId = symptomId;
     }
 
@@ -46,7 +46,7 @@ public class Symptom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Symptom symptom = (Symptom) o;
-        return symptomId == symptom.symptomId &&
+        return symptomId.equals(symptom.symptomId) &&
                 Objects.equals(name, symptom.name) &&
                 Objects.equals(info, symptom.info);
     }

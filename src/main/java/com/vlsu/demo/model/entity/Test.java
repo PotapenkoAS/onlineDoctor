@@ -6,28 +6,28 @@ import java.util.Objects;
 
 @Entity
 public class Test {
-    private int testId;
-    private int clientId;
+    private Long testId;
+    private Long clientId;
     private Date date;
     private Client clientByClientId;
 
     @Id
     @Column(name = "test_id")
-    public int getTestId() {
+    public Long getTestId() {
         return testId;
     }
 
-    public void setTestId(int testId) {
+    public void setTestId(Long testId) {
         this.testId = testId;
     }
 
     @Basic
     @Column(name = "client_id")
-    public int getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
@@ -46,8 +46,8 @@ public class Test {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return testId == test.testId &&
-                clientId == test.clientId &&
+        return testId.equals(test.testId) &&
+                clientId.equals(test.clientId) &&
                 Objects.equals(date, test.date);
     }
 
