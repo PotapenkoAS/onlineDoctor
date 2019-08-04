@@ -1,25 +1,19 @@
 package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
 public class User {
     private int userId;
-    @Size(min = 6, max = 50, message = "Длина логина от 6 до 50 символов")
-    @NotNull(message = "Логин не может быть пустым")
     private String login;
-    @Size(min = 6, max = 50, message = "Длина пароля от 6 до 50 символов")
-    @NotNull(message = "Пароль не может быть пустым")
     private String password;
     private String role;
+    private Admin adminByUserId;
     private Client clientByUserId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -29,7 +23,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -39,7 +33,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -62,16 +56,31 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         User user = (User) o;
-        return userId == (user.userId) &&
-                login.equals(user.login) &&
-                password.equals(user.password) &&
-                role.equals(user.role);
+
+        if (userId != user.userId) return false;
+        if (!Objects.equals(login, user.login)) return false;
+        if (!Objects.equals(password, user.password)) return false;
+        return Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, login, password, role);
+        int result = userId;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
+
+    @OneToOne(mappedBy = "userByUserId")
+    public Admin getAdminByUserId() {
+        return adminByUserId;
+    }
+
+    public void setAdminByUserId(Admin adminByUserId) {
+        this.adminByUserId = adminByUserId;
     }
 
     @OneToOne(mappedBy = "userByUserId")
@@ -83,12 +92,14 @@ public class User {
         this.clientByUserId = clientByUserId;
     }
 
+    public User(){
+
+    }
+
     public User(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;
     }
-
-    public User() {
-    }
 }
+

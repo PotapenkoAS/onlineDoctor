@@ -11,9 +11,8 @@ public class Medicament {
     private String info;
     private Collection<DiseaseMed> diseaseMedsByMedicamentId;
 
-
     @Id
-    @Column(name = "medicament_id")
+    @Column(name = "medicament_id", nullable = false)
     public int getMedicamentId() {
         return medicamentId;
     }
@@ -23,7 +22,7 @@ public class Medicament {
     }
 
     @Basic
-    @Column(name = "Name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -33,7 +32,7 @@ public class Medicament {
     }
 
     @Basic
-    @Column(name = "Info")
+    @Column(name = "info", length = -1)
     public String getInfo() {
         return info;
     }
@@ -46,15 +45,20 @@ public class Medicament {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Medicament that = (Medicament) o;
-        return medicamentId == (that.medicamentId) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(info, that.info);
+
+        if (medicamentId != that.medicamentId) return false;
+        if (!Objects.equals(name, that.name)) return false;
+        return Objects.equals(info, that.info);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(medicamentId, name, info);
+        int result = medicamentId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
     }
 
     @OneToMany(mappedBy = "medicamentByMedicamentId")

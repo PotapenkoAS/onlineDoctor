@@ -1,6 +1,6 @@
 package com.vlsu.demo.service;
 
-import com.vlsu.demo.model.restObject.DiseaseWithRate;
+import com.vlsu.demo.model.restObject.DiseaseWithRates;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -17,8 +17,8 @@ public class DiseaseService {
     @PersistenceContext
     EntityManager em;
 
-    public ArrayList<DiseaseWithRate> getAllBySymptoms(String symptoms) {
-        Query query = em.createNativeQuery("select distinct d.disease_id as diseaseId, d.name as name,d.info as info, " +
+    public ArrayList<DiseaseWithRates> getAllBySymptoms(String symptoms) {
+        Query query = em.createNativeQuery("select distinct d.disease_id as diseaseId, d.name as diseaseName,d.info as diseaseInfo, " +
                 "case when ifNull(mand.mand_count,0) = 0 then 0 else (mand.mand_rate/mand.mand_count) end as mandatoryRate, " +
                 "case when ifNull(mand.mand_count,0) = 0 then 0 else (opt.opt_rate/opt.opt_count) end as optionRate " +
                 "from online_doctor.Disease d " +
@@ -36,21 +36,23 @@ public class DiseaseService {
                         "group by disease_id) " +
                     "as opt " +
                     "on d.disease_id= opt.disease_id " +
-                "where ds.symptom_id in (:symptoms)");
+                "where ds.symptom_id in (:symptoms) " +
+                "order by mandatoryRate desc;");
         List<Integer> parsedSymptoms = Arrays.stream(symptoms.split(",")).map(Integer::parseInt).collect(Collectors.toList());
         query.setParameter("symptoms", parsedSymptoms);
         return mapToDiseaseWithRate(query.getResultList());
     }
 
-    private ArrayList<DiseaseWithRate> mapToDiseaseWithRate(List list) {
-        ArrayList<DiseaseWithRate> result = new ArrayList<>();
-        for (Object o : list) {
-            result.add(new DiseaseWithRate(
+    private ArrayList<DiseaseWithRates> mapToDiseaseWithRate(List list) {
+        ArrayList<DiseaseWithRates> result = new ArrayList<>();
+            for (Object o : list) {
+            result.add(new DiseaseWithRates(
                     (int) (((Object[]) o)[0])
                     , ((String) ((Object[]) o)[1])
                     , ((String) ((Object[]) o)[2])
-                    , ((Long) ((Object[]) o)[3])
-                    , ((Long) ((Object[]) o)[4])));
+                    , ((Double) ((Object[]) o)[3])
+                    , ((Double) ((Object[]) o)[4])
+            ));
         }
         return result;
     }

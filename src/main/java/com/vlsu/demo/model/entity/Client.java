@@ -19,8 +19,7 @@ public class Client {
     private Collection<Test> testsByClientId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false)
     public int getClientId() {
         return clientId;
     }
@@ -70,7 +69,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "weight")
+    @Column(name = "weight", precision = 2)
     public Double getWeight() {
         return weight;
     }
@@ -80,7 +79,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "height")
+    @Column(name = "height", precision = 2)
     public Double getHeight() {
         return height;
     }
@@ -100,7 +99,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -113,21 +112,32 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Client client = (Client) o;
-        return clientId == (client.clientId) &&
-                userId == (client.userId) &&
-                Objects.equals(name, client.name) &&
-                Objects.equals(surname, client.surname) &&
-                Objects.equals(patronymic, client.patronymic) &&
-                Objects.equals(age, client.age) &&
-                Objects.equals(weight, client.weight) &&
-                Objects.equals(height, client.height) &&
-                Objects.equals(sex, client.sex);
+
+        if (clientId != client.clientId) return false;
+        if (userId != client.userId) return false;
+        if (!Objects.equals(name, client.name)) return false;
+        if (!Objects.equals(surname, client.surname)) return false;
+        if (!Objects.equals(patronymic, client.patronymic)) return false;
+        if (!Objects.equals(age, client.age)) return false;
+        if (!Objects.equals(weight, client.weight)) return false;
+        if (!Objects.equals(height, client.height)) return false;
+        return Objects.equals(sex, client.sex);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientId, name, surname, patronymic, age, weight, height, sex, userId);
+        int result = clientId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (patronymic != null ? patronymic.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (weight != null ? weight.hashCode() : 0);
+        result = 31 * result + (height != null ? height.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + userId;
+        return result;
     }
 
     @OneToOne

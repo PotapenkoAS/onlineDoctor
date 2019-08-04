@@ -1,18 +1,18 @@
 package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 public class Test {
     private int testId;
     private int clientId;
-    private Date date;
+    private Timestamp date;
     private Client clientByClientId;
 
     @Id
-    @Column(name = "test_id")
+    @Column(name = "test_id", nullable = false)
     public int getTestId() {
         return testId;
     }
@@ -22,7 +22,7 @@ public class Test {
     }
 
     @Basic
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false)
     public int getClientId() {
         return clientId;
     }
@@ -33,11 +33,11 @@ public class Test {
 
     @Basic
     @Column(name = "date")
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -45,15 +45,20 @@ public class Test {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Test test = (Test) o;
-        return testId == (test.testId) &&
-                clientId == (test.clientId) &&
-                Objects.equals(date, test.date);
+
+        if (testId != test.testId) return false;
+        if (clientId != test.clientId) return false;
+        return Objects.equals(date, test.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(testId, clientId, date);
+        int result = testId;
+        result = 31 * result + clientId;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
 
     @ManyToOne

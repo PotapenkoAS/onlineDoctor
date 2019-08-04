@@ -14,7 +14,7 @@ create table user
 create table client
 (
 	client_id int auto_increment,
-	name varchar(255) null,
+	diseaseName varchar(255) null,
 	surname varchar(255) null,
 	patronymic varchar(255) null,
 	age int null,
@@ -109,4 +109,6 @@ alter table disease_med
 	alter table disease_symptom
     	add mandatory boolean default false not null;
 
+alter table disease_med modify rate float(11,2) not null;
 
+alter table disease_symptom modify rate float(11,2) not null;

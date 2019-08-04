@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 
-    <persistence-unit name="NewPersistenceUnit">
+    <persistence-unit name="newPersistenceUnit">
         <class>com.vlsu.demo.model.entity.Admin</class>
         <class>com.vlsu.demo.model.entity.Client</class>
         <class>com.vlsu.demo.model.entity.Disease</class>
@@ -15,11 +15,14 @@
         <class>com.vlsu.demo.model.entity.Test</class>
         <class>com.vlsu.demo.model.entity.User</class>
         <properties>
+            <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/"/>
+            <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/"/>
             <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="openjpa.ConnectionUserName" value=""/>
-            <property name="openjpa.ConnectionPassword" value=""/>
-            <property name="openjpa.Log" value="DefaultLevel=TRACE, Tool=INFO"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

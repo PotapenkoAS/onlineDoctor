@@ -1,18 +1,15 @@
 package com.vlsu.demo.model.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
 public class Admin {
     private int adminId;
     private int userId;
+    private User userByUserId;
 
     @Id
-    @Column(name = "admin_id")
+    @Column(name = "admin_id", nullable = false)
     public int getAdminId() {
         return adminId;
     }
@@ -22,7 +19,7 @@ public class Admin {
     }
 
     @Basic
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -35,13 +32,27 @@ public class Admin {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Admin admin = (Admin) o;
-        return adminId == (admin.adminId) &&
-                userId == (admin.userId);
+
+        if (adminId != admin.adminId) return false;
+        return userId == admin.userId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(adminId, userId);
+        int result = adminId;
+        result = 31 * result + userId;
+        return result;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false, insertable = false, updatable = false)
+    public User getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
     }
 }

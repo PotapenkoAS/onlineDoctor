@@ -3,7 +3,6 @@ package com.vlsu.demo.model.entity;
 import com.vlsu.demo.model.compositeKey.DiseaseMedKey;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @IdClass(DiseaseMedKey.class)
@@ -11,13 +10,13 @@ import java.util.Objects;
 public class DiseaseMed {
     private int diseaseId;
     private int medicamentId;
+    private double rate;
     private Disease diseaseByDiseaseId;
     private Medicament medicamentByMedicamentId;
-    private Long rate;
 
     @Basic
     @Id
-    @Column(name = "disease_id")
+    @Column(name = "disease_id", nullable = false)
     public int getDiseaseId() {
         return diseaseId;
     }
@@ -28,7 +27,7 @@ public class DiseaseMed {
 
     @Basic
     @Id
-    @Column(name = "medicament_id")
+    @Column(name = "medicament_id", nullable = false)
     public int getMedicamentId() {
         return medicamentId;
     }
@@ -38,12 +37,12 @@ public class DiseaseMed {
     }
 
     @Basic
-    @Column(name = "rate")
-    public Long getRate() {
+    @Column(name = "rate", nullable = false, precision = 2)
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(Long rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
@@ -51,14 +50,23 @@ public class DiseaseMed {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         DiseaseMed that = (DiseaseMed) o;
-        return diseaseId == (that.diseaseId) &&
-                Objects.equals(medicamentId, that.medicamentId);
+
+        if (diseaseId != that.diseaseId) return false;
+        if (medicamentId != that.medicamentId) return false;
+        return Double.compare(that.rate, rate) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(diseaseId, medicamentId);
+        int result;
+        long temp;
+        result = diseaseId;
+        result = 31 * result + medicamentId;
+        temp = Double.doubleToLongBits(rate);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @ManyToOne
@@ -72,7 +80,7 @@ public class DiseaseMed {
     }
 
     @ManyToOne
-    @JoinColumn(name = "medicament_id", referencedColumnName = "medicament_id", insertable = false, updatable = false)
+    @JoinColumn(name = "medicament_id", referencedColumnName = "medicament_id", nullable = false, insertable = false, updatable = false)
     public Medicament getMedicamentByMedicamentId() {
         return medicamentByMedicamentId;
     }
@@ -80,6 +88,4 @@ public class DiseaseMed {
     public void setMedicamentByMedicamentId(Medicament medicamentByMedicamentId) {
         this.medicamentByMedicamentId = medicamentByMedicamentId;
     }
-
-
 }

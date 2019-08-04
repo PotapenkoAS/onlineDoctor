@@ -12,7 +12,7 @@ public class Symptom {
     private Collection<DiseaseSymptom> diseaseSymptomsBySymptomId;
 
     @Id
-    @Column(name = "symptom_id")
+    @Column(name = "symptom_id", nullable = false)
     public int getSymptomId() {
         return symptomId;
     }
@@ -22,7 +22,7 @@ public class Symptom {
     }
 
     @Basic
-    @Column(name = "Name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,7 +32,7 @@ public class Symptom {
     }
 
     @Basic
-    @Column(name = "Info")
+    @Column(name = "info", length = -1)
     public String getInfo() {
         return info;
     }
@@ -45,15 +45,20 @@ public class Symptom {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Symptom symptom = (Symptom) o;
-        return symptomId == (symptom.symptomId) &&
-                Objects.equals(name, symptom.name) &&
-                Objects.equals(info, symptom.info);
+
+        if (symptomId != symptom.symptomId) return false;
+        if (!Objects.equals(name, symptom.name)) return false;
+        return Objects.equals(info, symptom.info);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symptomId, name, info);
+        int result = symptomId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
     }
 
     @OneToMany(mappedBy = "symptomBySymptomId")

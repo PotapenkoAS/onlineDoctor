@@ -1,7 +1,6 @@
 package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.CustomUserDetails;
-import com.vlsu.demo.model.entity.User;
 import com.vlsu.demo.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,12 +32,12 @@ public class UserService {
         return errorList;
     }
 
-    public Long getCurrentUserId() {
+    public int getCurrentUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof CustomUserDetails) {
             return ((CustomUserDetails) principal).getUserId();
         }else{
-            return 0L;
+            return 0;
         }
     }
 
