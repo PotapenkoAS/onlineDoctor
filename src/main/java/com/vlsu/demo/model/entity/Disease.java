@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 public class Disease {
-    private Long diseaseId;
+    private int diseaseId;
     private String name;
     private String info;
     private Collection<DiseaseMed> diseaseMedsByDiseaseId;
@@ -14,11 +14,11 @@ public class Disease {
 
     @Id
     @Column(name = "disease_id")
-    public Long getDiseaseId() {
+    public int getDiseaseId() {
         return diseaseId;
     }
 
-    public void setDiseaseId(Long diseaseId) {
+    public void setDiseaseId(int diseaseId) {
         this.diseaseId = diseaseId;
     }
 
@@ -47,7 +47,7 @@ public class Disease {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Disease disease = (Disease) o;
-        return diseaseId.equals(disease.diseaseId) &&
+        return diseaseId == (disease.diseaseId) &&
                 Objects.equals(name, disease.name) &&
                 Objects.equals(info, disease.info);
     }

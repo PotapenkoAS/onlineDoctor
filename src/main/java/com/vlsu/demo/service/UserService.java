@@ -33,12 +33,12 @@ public class UserService {
         return errorList;
     }
 
-    public int getCurrentUserId() {
+    public Long getCurrentUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof CustomUserDetails) {
             return ((CustomUserDetails) principal).getUserId();
         }else{
-            return 0;
+            return 0L;
         }
     }
 

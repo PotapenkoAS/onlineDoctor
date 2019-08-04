@@ -9,8 +9,8 @@ import java.util.Objects;
 @IdClass(DiseaseMedKey.class)
 @Table(name = "disease_med", schema = "online_doctor")
 public class DiseaseMed {
-    private Long diseaseId;
-    private Long medicamentId;
+    private int diseaseId;
+    private int medicamentId;
     private Disease diseaseByDiseaseId;
     private Medicament medicamentByMedicamentId;
     private Long rate;
@@ -18,22 +18,22 @@ public class DiseaseMed {
     @Basic
     @Id
     @Column(name = "disease_id")
-    public Long getDiseaseId() {
+    public int getDiseaseId() {
         return diseaseId;
     }
 
-    public void setDiseaseId(Long diseaseId) {
+    public void setDiseaseId(int diseaseId) {
         this.diseaseId = diseaseId;
     }
 
     @Basic
     @Id
     @Column(name = "medicament_id")
-    public Long getMedicamentId() {
+    public int getMedicamentId() {
         return medicamentId;
     }
 
-    public void setMedicamentId(Long medicamentId) {
+    public void setMedicamentId(int medicamentId) {
         this.medicamentId = medicamentId;
     }
 
@@ -52,7 +52,7 @@ public class DiseaseMed {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiseaseMed that = (DiseaseMed) o;
-        return diseaseId.equals(that.diseaseId) &&
+        return diseaseId == (that.diseaseId) &&
                 Objects.equals(medicamentId, that.medicamentId);
     }
 

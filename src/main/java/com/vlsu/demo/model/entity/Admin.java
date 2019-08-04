@@ -8,26 +8,26 @@ import java.util.Objects;
 
 @Entity
 public class Admin {
-    private Long adminId;
-    private Long userId;
+    private int adminId;
+    private int userId;
 
     @Id
     @Column(name = "admin_id")
-    public Long getAdminId() {
+    public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(Long adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
 
     @Basic
     @Column(name = "user_id")
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -36,8 +36,8 @@ public class Admin {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Admin admin = (Admin) o;
-        return adminId.equals(admin.adminId) &&
-                userId.equals(admin.userId);
+        return adminId == (admin.adminId) &&
+                userId == (admin.userId);
     }
 
     @Override

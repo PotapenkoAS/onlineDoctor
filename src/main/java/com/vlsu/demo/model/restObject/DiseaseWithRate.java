@@ -1,23 +1,25 @@
 package com.vlsu.demo.model.restObject;
 
 public class DiseaseWithRate {
-    private Long diseaseId;
+    private int diseaseId;
     private String name;
     private String info;
-    private Long rate;
+    private Long mandatoryRate;
+    private Long optionalRate;
 
-    public DiseaseWithRate(Long diseaseId, String name, String info, Long rate) {
+    public DiseaseWithRate(int diseaseId, String name, String info, Long mandatoryRate, Long optionalRate) {
         this.diseaseId = diseaseId;
         this.name = name;
         this.info = info;
-        this.rate = rate;
+        this.mandatoryRate = mandatoryRate;
+        this.optionalRate = optionalRate;
     }
 
-    public Long getDiseaseId() {
+    public int getDiseaseId() {
         return diseaseId;
     }
 
-    public void setDiseaseId(Long diseaseId) {
+    public void setDiseaseId(int diseaseId) {
         this.diseaseId = diseaseId;
     }
 
@@ -37,11 +39,19 @@ public class DiseaseWithRate {
         this.info = info;
     }
 
-    public Long getRate() {
-        return rate;
+    public Long getMandatoryRate() {
+        return mandatoryRate;
     }
 
-    public void setRate(Long rate) {
-        this.rate = rate;
+    public void setMandatoryRate(Long mandatoryRate) {
+        this.mandatoryRate = mandatoryRate;
+    }
+
+    public Long getOptionalRate() {
+        return optionalRate;
+    }
+
+    public void setOptionalRate(Long optionalRate) {
+        this.optionalRate = optionalRate;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 public class Client {
-    private Long clientId;
+    private int clientId;
     private String name;
     private String surname;
     private String patronymic;
@@ -14,18 +14,18 @@ public class Client {
     private Double weight;
     private Double height;
     private Byte sex;
-    private Long userId;
+    private int userId;
     private User userByUserId;
     private Collection<Test> testsByClientId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "client_id")
-    public Long getClientId() {
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(Long clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
@@ -101,11 +101,11 @@ public class Client {
 
     @Basic
     @Column(name = "user_id")
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -114,8 +114,8 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return clientId.equals(client.clientId) &&
-                userId.equals(client.userId) &&
+        return clientId == (client.clientId) &&
+                userId == (client.userId) &&
                 Objects.equals(name, client.name) &&
                 Objects.equals(surname, client.surname) &&
                 Objects.equals(patronymic, client.patronymic) &&

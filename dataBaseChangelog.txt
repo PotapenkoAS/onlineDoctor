@@ -101,7 +101,12 @@ alter table user modify password varchar(255) not null;
 alter table user modify role VARCHAR(255) not null;
 
 alter table disease_symptom
-	add rate int not null;
+	add mandatoryRate int not null;
 
 alter table disease_med
-	add rate int not null;
+	add mandatoryRate int not null;
+
+	alter table disease_symptom
+    	add mandatory boolean default false not null;
+
+

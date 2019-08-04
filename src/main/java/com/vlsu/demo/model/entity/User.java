@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 public class User {
-    private Long userId;
+    private int userId;
     @Size(min = 6, max = 50, message = "Длина логина от 6 до 50 символов")
     @NotNull(message = "Логин не может быть пустым")
     private String login;
@@ -20,11 +20,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -63,7 +63,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId) &&
+        return userId == (user.userId) &&
                 login.equals(user.login) &&
                 password.equals(user.password) &&
                 role.equals(user.role);
