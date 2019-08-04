@@ -7,19 +7,19 @@ import java.util.Collection;
 
 public class CustomUserDetails extends User {
 
-    private Long userId;
+    private int userId;
 
     public CustomUserDetails(String username, String password, boolean enabled, boolean accountNonExpired
-            , boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities, Long userId) {
+            , boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities, int userId) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userId = userId;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }
