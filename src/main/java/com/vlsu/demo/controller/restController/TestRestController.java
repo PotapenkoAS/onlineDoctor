@@ -1,6 +1,6 @@
 package com.vlsu.demo.controller.restController;
 
-import com.vlsu.demo.model.restObject.DiseaseWithRates;
+import com.vlsu.demo.model.restObject.DiseaseWithMeds;
 import com.vlsu.demo.service.DiseaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class TestRestController {
     }
 
     @GetMapping("/update_diseases")
-    public ArrayList<DiseaseWithRates> updateDiseases(@RequestParam(name = "symptoms") String symptoms) {
+    public ArrayList<DiseaseWithMeds> updateDiseases(@RequestParam(name = "symptoms") String symptoms) {
         return diseaseService.getAllBySymptoms(symptoms);
     }
 }

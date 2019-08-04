@@ -1,18 +1,22 @@
 package com.vlsu.demo.model.restObject;
 
-public class DiseaseWithRates {
+import java.util.ArrayList;
+
+public class DiseaseWithMeds {
     private int diseaseId;
     private String diseaseName;
     private String diseaseInfo;
     private Double mandatoryRate;
     private Double optionalRate;
+    private ArrayList<MedicamentWithRate> meds;
 
-    public DiseaseWithRates(int diseaseId, String diseaseName, String diseaseInfo, Double mandatoryRate, Double optionalRate) {
+    public DiseaseWithMeds(int diseaseId, String diseaseName, String diseaseInfo, Double mandatoryRate, Double optionalRate, ArrayList<MedicamentWithRate> meds) {
         this.diseaseId = diseaseId;
         this.diseaseName = diseaseName;
         this.diseaseInfo = diseaseInfo;
         this.mandatoryRate = mandatoryRate;
         this.optionalRate = optionalRate;
+        this.meds = meds;
     }
 
     public int getDiseaseId() {
@@ -55,4 +59,11 @@ public class DiseaseWithRates {
         this.optionalRate = optionalRate;
     }
 
+    public ArrayList<MedicamentWithRate> getMeds() {
+        return meds;
+    }
+
+    public void setMeds(ArrayList<MedicamentWithRate> meds) {
+        this.meds = meds;
+    }
 }
