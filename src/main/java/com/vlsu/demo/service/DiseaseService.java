@@ -19,7 +19,7 @@ public class DiseaseService {
     @PersistenceContext
     EntityManager em;
 
-    public ArrayList<DiseaseWithMeds> getAllBySymptoms(String symptoms) {
+    public ArrayList<DiseaseWithMeds> getAllBySymptoms(String symptoms) { // "1,2,3"
         Query query = em.createNativeQuery("select distinct d.disease_id as diseaseId, d.name as diseaseName,d.info as diseaseInfo, " +
                 "case when ifNull(mand.mand_count,0) = 0 then 0 else (mand.mand_rate/mand.mand_count) end as mandatoryRate, " +
                 "case when ifNull(mand.mand_count,0) = 0 then 0 else (opt.opt_rate/opt.opt_count) end as optionRate " +
@@ -34,7 +34,7 @@ public class DiseaseService {
                     "on d.disease_id=mand.disease_id " +
                 "left join " +
                     "(select sum(rate) as opt_rate, count(*) as opt_count,disease_id from online_doctor.disease_symptom " +
-                        "where mandatory=true " +
+                        "where mandatory=1 " +
                         "group by disease_id) " +
                     "as opt " +
                     "on d.disease_id= opt.disease_id " +
@@ -62,7 +62,7 @@ public class DiseaseService {
         }
         return result;
     }
-
+//ujdybooot
     private ArrayList<DiseaseWithMeds> mapToDiseaseWithRate(List diseasesList, List medicamentsList) {
         ArrayList<DiseaseWithMeds> result = new ArrayList<>();
         for (Object o : diseasesList) {

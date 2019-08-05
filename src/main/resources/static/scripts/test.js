@@ -19,7 +19,7 @@ function updateDiseases() {
 
                 arr[++j] = '<div>';
                 for (var k = 0; k < data[i].meds.length; k++) {
-                    arr[++j] = '<p>Лекарство: ' + data[i].meds[k].name + '</p><p>Описание: ' + data[i].meds[k].info + '</p><p>Рейтинг: '+ data[i].meds[k].rate +'</p>';
+                    arr[++j] = '<p>Лекарство: ' + data[i].meds[k].name + '</p><p>Описание: ' + data[i].meds[k].info + '</p><p>Рейтинг: ' + data[i].meds[k].rate + '</p>';
                 }
                 arr[++j] = '</div>';
                 arr[++j] = '</div><br>';
