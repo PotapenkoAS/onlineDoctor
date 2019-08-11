@@ -1,7 +1,6 @@
 package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +15,6 @@ public class Client {
     private Byte sex;
     private int userId;
     private User userByUserId;
-    private Collection<Test> testsByClientId;
 
     @Id
     @Column(name = "client_id", nullable = false)
@@ -150,12 +148,4 @@ public class Client {
         this.userByUserId = userByUserId;
     }
 
-    @OneToMany(mappedBy = "clientByClientId")
-    public Collection<Test> getTestsByClientId() {
-        return testsByClientId;
-    }
-
-    public void setTestsByClientId(Collection<Test> testsByClientId) {
-        this.testsByClientId = testsByClientId;
-    }
 }

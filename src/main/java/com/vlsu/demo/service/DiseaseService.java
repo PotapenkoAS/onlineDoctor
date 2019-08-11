@@ -22,19 +22,21 @@ public class DiseaseService {
     public ArrayList<DiseaseWithMeds> getAllBySymptoms(String symptoms) { // "1,2,3"
         Query query = em.createNativeQuery("select distinct d.disease_id as diseaseId, d.name as diseaseName,d.info as diseaseInfo, " +
                 "case when ifNull(mand.mand_count,0) = 0 then 0 else (mand.mand_rate/mand.mand_count) end as mandatoryRate, " +
-                "case when ifNull(mand.mand_count,0) = 0 then 0 else (opt.opt_rate/opt.opt_count) end as optionRate " +
+                "case when ifNull(opt.opt_count,0) = 0 then 0 else (opt.opt_rate/opt.opt_count) end as optionRate " +
                 "from online_doctor.Disease d " +
                 "inner join " +
                     "online_doctor.disease_symptom ds on ds.disease_id=d.disease_id " +
                 "left join " +
                     "(select sum(rate) as mand_rate, count(*) as mand_count,disease_id from online_doctor.disease_symptom " +
                         "where mandatory = 0 " +
+                        "and symptom_id in (:symptoms) " +
                         "group by disease_id) " +
                     "as mand " +
                     "on d.disease_id=mand.disease_id " +
                 "left join " +
                     "(select sum(rate) as opt_rate, count(*) as opt_count,disease_id from online_doctor.disease_symptom " +
                         "where mandatory=1 " +
+                        "and symptom_id in (:symptoms) " +
                         "group by disease_id) " +
                     "as opt " +
                     "on d.disease_id= opt.disease_id " +
@@ -52,7 +54,7 @@ public class DiseaseService {
         query.setParameter("symptoms", parsedSymptoms);
         query.setParameter("diseases", collectDiseases(diseaseWithRates));
         List medicaments = query.getResultList();
-        return mapToDiseaseWithRate(diseaseWithRates,medicaments);
+        return mapToDiseaseWithRate(diseaseWithRates, medicaments);
     }
 
     private List<Integer> collectDiseases(List list) {
@@ -62,7 +64,7 @@ public class DiseaseService {
         }
         return result;
     }
-//ujdybooot
+
     private ArrayList<DiseaseWithMeds> mapToDiseaseWithRate(List diseasesList, List medicamentsList) {
         ArrayList<DiseaseWithMeds> result = new ArrayList<>();
         for (Object o : diseasesList) {
@@ -71,7 +73,7 @@ public class DiseaseService {
             for (Object entry : medicamentsList) {
                 if (((Object[]) entry)[4].equals(diseaseId)) {
                     tempMedList.add(new MedicamentWithRate(
-                              ((int)    ((Object[]) entry)[0])
+                            ((int) ((Object[]) entry)[0])
                             , ((String) ((Object[]) entry)[1])
                             , ((String) ((Object[]) entry)[2])
                             , ((Double) ((Object[]) entry)[3])
@@ -79,7 +81,7 @@ public class DiseaseService {
                 }
             }
             result.add(new DiseaseWithMeds(
-                      ((int)    ((Object[]) o)[0])
+                    ((int) ((Object[]) o)[0])
                     , ((String) ((Object[]) o)[1])
                     , ((String) ((Object[]) o)[2])
                     , ((Double) ((Object[]) o)[3])

@@ -1,6 +1,7 @@
 package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,17 @@ public class User {
     private String role;
     private Admin adminByUserId;
     private Client clientByUserId;
+    private Collection<Test> testsByUserId;
+
+    public User(){
+
+    }
+
+    public User(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -92,14 +104,13 @@ public class User {
         this.clientByUserId = clientByUserId;
     }
 
-    public User(){
-
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<Test> getTestsByUserId() {
+        return testsByUserId;
     }
 
-    public User(String login, String password, String role) {
-        this.login = login;
-        this.password = password;
-        this.role = role;
+    public void setTestsByUserId(Collection<Test> testsByUserId) {
+        this.testsByUserId = testsByUserId;
     }
 }
 

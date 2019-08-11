@@ -1,4 +1,4 @@
-var symptoms = [1, 2, 3];
+var symptoms = [];
 
 function updateDiseases() {
     $.ajax({
@@ -8,6 +8,10 @@ function updateDiseases() {
         success: function (data) {
             var j = -1;
             var arr = [];
+            if(data==null){
+                $('#diseasesList').html("");
+                return;
+            }
             for (var i = 0; i < data.length; i++) {
                 arr[++j] = '<div>';
                 arr[++j] = '<div><p>Название: ' + data[i].diseaseName + '</p><p>Описание: ' + data[i].diseaseInfo + '</p></div>';
@@ -27,4 +31,40 @@ function updateDiseases() {
             $('#diseasesList').html(arr.join(''));
         }
     })
+}
+
+function saveTest() {
+    if (symptoms != null) {
+        $.ajax({
+            type: "POST",
+            url: "/rest/save_test",
+            data: {'symptoms': JSON.stringify(symptoms)},
+            success: function (data) {
+                var checkMark = document.getElementById("check_mark");
+                if (data === "success") {
+                    checkMark.style.color = "#12fc10";
+                    checkMark.innerText = "✓";
+                } else if (data === "empty") {
+                    checkMark.style.color = "#fcdb37";
+                    checkMark.innerText = "Пустой список не сохранен";
+                } else {
+                    checkMark.style.color = "#fc403d";
+                    checkMark.innerText = "🗙";
+                }
+            }
+        })
+    }
+}
+
+function updateSymptoms(checkbox) {
+    document.getElementById("check_mark").innerText = "";
+
+    if (checkbox.checked) {
+        symptoms.push(Number(checkbox.id));
+    } else {
+        symptoms = symptoms.filter(function (value) {
+            return value !== Number(checkbox.id);
+        })
+    }
+    updateDiseases();
 }

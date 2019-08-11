@@ -7,14 +7,23 @@
     <script type="text/javascript" src="scripts/test.js"></script>
 </head>
 <body>
+<div style="display: flex">
+    <div style="display: block">
+        <div th:each="line:${list}">
+            <p th:text="${line.name}+' - '+ ${line.info}"></p>
+            <input type="checkbox" name="symptomCheck" th:id="${line.symptomId}" onchange="updateSymptoms(this)">
+        </div>
+        <div style="display: inline">
+            <button onclick="saveTest()">Сохранить</button>
+            <a id="check_mark" style="color: #12fc10"></a>
+        </div>
+    </div>
 
-<button href="/"></button>
+    <div style="width:10%"></div>
 
-<p th:each="line:${list}" th:text="${line.name}+' - '+ ${line.info}"></p>
-<button onclick="updateDiseases()">click</button>
+    <div id="diseasesList">
 
-<div id="diseasesList">
-
+    </div>
 </div>
 </body>
 </html>

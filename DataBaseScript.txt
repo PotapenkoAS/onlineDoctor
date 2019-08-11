@@ -89,9 +89,10 @@ create table test
 (
 	test_id int auto_increment
 		primary key,
-	client_id int not null,
 	date datetime null,
-	constraint test_client_client_id_fk
-		foreign key (client_id) references client (client_id)
+	symptoms mediumtext not null,
+	user_id int not null,
+	constraint test_user_user_id_fk
+		foreign key (user_id) references user (user_id)
 );
 
