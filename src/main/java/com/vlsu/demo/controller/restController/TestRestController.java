@@ -1,13 +1,12 @@
 package com.vlsu.demo.controller.restController;
 
-import com.vlsu.demo.model.repository.ClientRepository;
-import com.vlsu.demo.model.restObject.DiseaseWithMeds;
-import com.vlsu.demo.service.*;
+import com.vlsu.demo.service.DiseaseService;
+import com.vlsu.demo.service.RestService;
+import com.vlsu.demo.service.TestService;
+import com.vlsu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/rest")

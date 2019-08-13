@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 @Service
 public class TestService {

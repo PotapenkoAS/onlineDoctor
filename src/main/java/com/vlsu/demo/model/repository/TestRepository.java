@@ -9,4 +9,5 @@ public interface TestRepository extends CrudRepository<Test,Integer> {
     Collection<Test> findAll();
     Collection<Test> findAllByUserIdOrderByDateDesc(int userId);
 
+
 }

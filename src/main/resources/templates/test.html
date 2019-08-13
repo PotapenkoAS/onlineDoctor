@@ -10,8 +10,8 @@
 <div style="display: flex">
     <div style="display: block">
         <div th:each="line:${list}">
-            <p th:text="${line.name}+' - '+ ${line.info}"></p>
             <input type="checkbox" name="symptomCheck" th:id="${line.symptomId}" onchange="updateSymptoms(this)">
+            <span th:text="${line.name}+' - '+ ${line.info}"></span>
         </div>
         <div style="display: inline">
             <button onclick="saveTest()">Сохранить</button>
