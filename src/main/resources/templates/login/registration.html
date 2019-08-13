@@ -14,7 +14,7 @@
         <div class="reg" align="center">
             <input name="login" placeholder='Логин' th:field="${user.login}" type="text">
             <p th:if="${#fields.hasErrors('login')}" th:errors="${user.login}" style="color:red"></p>
-            <br>
+            <br>    
             <input name="password" placeholder='Пароль' th:field="${user.password}" type='password'>
             <p th:if="${#fields.hasErrors('password')}" th:errors="${user.password}" style="color:red"></p>
             <p th:text="${error}" style="color:red"></p>
