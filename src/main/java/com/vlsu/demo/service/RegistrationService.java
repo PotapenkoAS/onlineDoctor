@@ -23,6 +23,7 @@ public class RegistrationService {
         this.userService = userService;
     }
 
+    // аннотация для нормальной работы сохранения
     @Transactional
     public ArrayList<String> saveClient(Client client, User user) {
         ArrayList<String> errorList = userService.loginPasswordValidation(user.getLogin(), user.getPassword());

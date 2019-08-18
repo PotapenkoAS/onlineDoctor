@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
 
-    @Override
+    @Override// метод автоматически вызывается при логине springSecurity и сохраняет полченный UserDetails объект в сессии пользователя
     public UserDetails loadUserByUsername(String username) {
         User user;
         try {

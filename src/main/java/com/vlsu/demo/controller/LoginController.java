@@ -17,7 +17,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String postLogin(@RequestParam(name = "error", required = false, defaultValue = "false") String error, Model model) {
-        if (error.equals("true")) {
+        if (error.equals("true")) { // error будет равно true, если будет ошибка при логине от spring security
             model.addAttribute("errorList","Неверное имя или пароль");
             return "login/login";
         }

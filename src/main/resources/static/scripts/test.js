@@ -1,17 +1,20 @@
 var symptoms = [];
 
 function updateDiseases() {
+    // создание ajax запроса
     $.ajax({
-        type: "GET",
-        url: "/rest/update_diseases?symptoms=" + symptoms,
-        dataType: "json",
-        success: function (data) {
+        type: "GET",//метод
+        url: "/rest/update_diseases?symptoms=" + symptoms,//url, по хорошему надо переделать передачу параметров через параметр data
+        dataType: "json",// тип, который ждем в ответ от сервера
+        success: function (data) {//выполняется при получении ответа HTTP 2xx
             var j = -1;
             var arr = [];
+            //обнуление списка болезней если данных не вернулось
             if(data==null){
                 $('#diseasesList').html("");
                 return;
             }
+            //генерация нового контента по пришедшим данным
             for (var i = 0; i < data.length; i++) {
                 arr[++j] = '<div>';
                 arr[++j] = '<div><p>Название: ' + data[i].diseaseName + '</p><p>Описание: ' + data[i].diseaseInfo + '</p></div>';
@@ -28,6 +31,7 @@ function updateDiseases() {
                 arr[++j] = '</div>';
                 arr[++j] = '</div><br>';
             }
+            //добавление сгенерированного контента на страницу
             $('#diseasesList').html(arr.join(''));
         }
     })
@@ -55,7 +59,7 @@ function saveTest() {
         })
     }
 }
-
+// изменение списка симпотомов и обновление списка болезней
 function updateSymptoms(checkbox) {
     document.getElementById("check_mark").innerText = "";
 

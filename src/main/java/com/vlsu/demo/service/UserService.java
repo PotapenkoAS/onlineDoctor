@@ -31,7 +31,7 @@ public class UserService {
         }
         return errorList;
     }
-
+// получение id текущего пользователя, сохраненного в сессии, если его нет, то вернется 0
     public int getCurrentUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof CustomUserDetails) {

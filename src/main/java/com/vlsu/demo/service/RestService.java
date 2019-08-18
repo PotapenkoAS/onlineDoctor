@@ -2,7 +2,7 @@ package com.vlsu.demo.service;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // костыль для правильного преобразования массива в строку
 public class RestService {
 
     public String convertArrayStringToString(String array) {
