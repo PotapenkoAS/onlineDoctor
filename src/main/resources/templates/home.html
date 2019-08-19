@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +9,6 @@
 <body>
 <a href="/login">login</a><br>
 <a href="/test">test</a>
+<a href="/tests" sec:authorize="authenticated"></a>
 </body>
 </html>

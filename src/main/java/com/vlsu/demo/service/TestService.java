@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Queue;
 
 @Service
 public class TestService {
@@ -31,6 +33,7 @@ public class TestService {
     public Collection<Test> getAllByUserId(int userId) {
         return testRepository.findAllByUserIdOrderByDateDesc(userId);
     }
+
 
     @Transactional
     public boolean saveTest(int clientId, String symptoms) {
