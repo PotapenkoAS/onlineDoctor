@@ -39,7 +39,7 @@ public class RegistrationController {
         return "login/registration";
     }
 
-    @PostMapping("/registration")// bindingResult используется для валидации значений прямо на форме(TODO)
+    @PostMapping("/registration")// bindingResult используется для валидации значений прямо на форме
     public String postRegistrationPage(@Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             return "login/registration";
