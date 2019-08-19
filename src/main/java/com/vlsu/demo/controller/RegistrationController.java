@@ -58,7 +58,6 @@ public class RegistrationController {
         model.addAttribute("user", user);
         return "login/post_registration";
     }
-//todo fix validation
     @PostMapping("/post_registration")
     public String postPostRegistrationPage(Client client, String password, String login, Model model) {
         User user = new User(login, password, "CLIENT");

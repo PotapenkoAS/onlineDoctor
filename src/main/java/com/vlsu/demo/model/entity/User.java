@@ -1,13 +1,19 @@
 package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class User {
     private int userId;
+    @Size(min = 6, max = 50,message = "Длина логина от 6 до 50 символов")
+    @NotNull(message = "Логин не может быть пустым")
     private String login;
+    @Size(min = 6, max = 50,message = "Длина пароля от 6 до 50 символов")
+    @NotNull(message = "Пароль не может быть пустым")
     private String password;
     private String role;
     private Admin adminByUserId;
@@ -25,6 +31,7 @@ public class User {
     }
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
