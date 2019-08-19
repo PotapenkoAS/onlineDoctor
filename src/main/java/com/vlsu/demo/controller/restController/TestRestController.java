@@ -25,7 +25,7 @@ public class TestRestController {
         this.restService = restService;
     }
 
-    @GetMapping("/update_diseases")
+    @GetMapping("/update_diseases")//responseEntity позволяет удобнее собирать ответ
     public ResponseEntity updateDiseases(@RequestParam(name = "symptoms") String symptoms) {
         if (symptoms.equals("")) {
             return ResponseEntity.status(204).body(null);
@@ -35,10 +35,10 @@ public class TestRestController {
 
     @PostMapping("/save_test")
     public String saveTest(String symptoms) {
-        String parsedSymptoms = restService.convertArrayStringToString(symptoms);
-        if (parsedSymptoms.equals("")) {
+        String convertedSymptoms = restService.convertArrayStringToString(symptoms);
+        if (convertedSymptoms.equals("")) {
             return "empty";
-        } else if (testService.saveTest(userService.getCurrentUserId(), parsedSymptoms)) {
+        } else if (testService.saveTest(userService.getCurrentUserId(), convertedSymptoms)) {
             return "success";
         } else {
             return "error";

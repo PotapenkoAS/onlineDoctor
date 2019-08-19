@@ -10,6 +10,7 @@ public class Symptom {
     private String name;
     private String info;
     private Collection<DiseaseSymptom> diseaseSymptomsBySymptomId;
+    private Collection<TestSymptom> testSymptomsBySymptomId;
 
     @Id
     @Column(name = "symptom_id", nullable = false)
@@ -68,5 +69,14 @@ public class Symptom {
 
     public void setDiseaseSymptomsBySymptomId(Collection<DiseaseSymptom> diseaseSymptomsBySymptomId) {
         this.diseaseSymptomsBySymptomId = diseaseSymptomsBySymptomId;
+    }
+
+    @OneToMany(mappedBy = "symptomBySymptomId")
+    public Collection<TestSymptom> getTestSymptomsBySymptomId() {
+        return testSymptomsBySymptomId;
+    }
+
+    public void setTestSymptomsBySymptomId(Collection<TestSymptom> testSymptomsBySymptomId) {
+        this.testSymptomsBySymptomId = testSymptomsBySymptomId;
     }
 }

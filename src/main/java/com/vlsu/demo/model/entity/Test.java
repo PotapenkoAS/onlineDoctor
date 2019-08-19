@@ -2,6 +2,7 @@ package com.vlsu.demo.model.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,7 @@ public class Test {
     private String symptoms;
     private int userId;
     private User userByUserId;
+    private Collection<TestSymptom> testSymptomsByTestId;
 
     public Test(int userId, String symptoms, Timestamp date) {
         this.userId = userId;
@@ -22,6 +24,7 @@ public class Test {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "test_id", nullable = false)
     public int getTestId() {
         return testId;
@@ -61,7 +64,6 @@ public class Test {
         return result;
     }
 
-
     @Basic
     @Column(name = "symptoms")
     public String getSymptoms() {
@@ -90,5 +92,14 @@ public class Test {
 
     public void setUserByUserId(User userByUserId) {
         this.userByUserId = userByUserId;
+    }
+
+    @OneToMany(mappedBy = "testByTestId")
+    public Collection<TestSymptom> getTestSymptomsByTestId() {
+        return testSymptomsByTestId;
+    }
+
+    public void setTestSymptomsByTestId(Collection<TestSymptom> testSymptomsByTestId) {
+        this.testSymptomsByTestId = testSymptomsByTestId;
     }
 }
