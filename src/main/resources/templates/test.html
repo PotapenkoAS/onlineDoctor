@@ -2,28 +2,124 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Test</title>
+    <!--<script typr="text/javascript" src="scripts/test1.js"></script>-->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/test.js"></script>
+    <link href="/content/style.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Libre+Baskerville');
+        body {
+            margin: 0; /*Устанавливает величину отступа от каждого края элемента.*/
+            background-image: url(https://html5book.ru/wp-content/uploads/2017/03/dulcineia-dias-195000.jpg);
+            /*background-image: url(http://www.medic.sysrq.ru/sites/default/files/themepic/background.jpg);
+            background-image: url("http://novaskin.org/wp-content/uploads/2018/01/%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D0%B0.jpg");
+            */ background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+            position:relative;
+        }
+        body:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            height: 19%;
+            width: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0), rgba(255,255,255,.8));
+        }
+    </style>
 </head>
 <body>
-<div style="display: flex">
-    <div style="display: block">
-        <div th:each="line:${list}">
-            <input type="checkbox" name="symptomCheck" th:id="${line.symptomId}" onchange="updateSymptoms(this)">
-            <span th:text="${line.name}+' - '+ ${line.info}"></span>
-        </div>
-        <div style="display: inline">
-            <button onclick="saveTest()">Сохранить</button>
-            <a id="check_mark" style="color: #12fc10"></a>
-        </div>
+<header>
+    <div class="container">
+        <nav>
+            <ul class="topmenu">
+                <a class="navbar-logo" href="/"><img src="http://www.medic.sysrq.ru/sites/default/files/themepic/logo.png" width="100" height="100" alt="Логотип" ></a>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/test">Пройти тест</a></li>
+                <li><a href="" class="down">Справочники</a>
+                    <ul class="submenu">
+                        <li><a href="">Болезни</a></li>
+                        <li><a href="">Симптомы</a></li>
+                        <li><a href="">Лекарства</a></li>
+                    </ul>
+                </li>
+                <li><a href="" class="down">Личный кабинет</a>
+                    <ul class="submenu">
+                        <li><a href="">Мои данные</a></li>
+                        <li><a href="">Пройденные тесты</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contacts">Контакты</a></li>
+            </ul>
+        </nav>
     </div>
-
-    <div style="width:10%"></div>
-
-    <div id="diseasesList">
-
+</header>
+<br>
+<br>
+<div class="main">
+    <div class="containerTest">
+        <div class="row">
+            <span class="TextHead"><p align="center">Прохождение теста</p></span>
+            <span class="Text"><p align="center">Выберите беспокоющие вас симптомы, для постановки предварительного диагноза </p></span>
+            <br>
+        </div>
+        <div class="row">
+            <div style="display: flex">
+                <div class="col-1-3">
+                    <h3 align="center">Симптомы</h3>
+                    <div style="display: block">
+                        <div th:each="line:${list}">
+                            <input type="checkbox" name="symptomCheck" th:id="${line.symptomId}" onchange="updateSymptoms(this)">
+                            <span th:text="${line.name}+' - '+ ${line.info}"></span>
+                        </div>
+                        <div style="display: inline">
+                            <button onclick="saveTest()">Сохранить</button>
+                            <a id="check_mark" style="color: #12fc10"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2-3">
+                    <h3 align="center">Вероятные болезни</h3>
+                    <div style="width:10%"></div>
+                    <div id="diseasesList">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+
+<!--<div class="main">             Исходный вариант
+
+    <div class="row">
+        <span class="TextHome"><p align="center">Прохождение теста</p></span>
+        <span class="TextHome2"><p align="center">Выберите беспокоющие вас симптомы, для постановки предварительного диагноза </p></span>
+        <br>
+        <div style="display: flex">
+            <div style="display: block">
+                <div th:each="line:${list}">
+                    <input type="checkbox" name="symptomCheck" th:id="${line.symptomId}" onchange="updateSymptoms(this)">
+                    <span th:text="${line.name}+' - '+ ${line.info}"></span>
+                </div>
+                <div style="display: inline">
+                    <button onclick="saveTest()">Сохранить</button>
+                    <a id="check_mark" style="color: #12fc10"></a>
+                </div>
+            </div>
+            <div style="width:10%"></div>
+            <div id="diseasesList">
+            </div>
+        </div>
+    </div>
+</div>
+-->
 </body>
 </html>
