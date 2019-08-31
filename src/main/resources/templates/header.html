@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/content/style.css" type="text/css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+<div th:fragment="header-fragment">
+    <div class="container">
+        <nav>
+            <ul class="topmenu">
+                <a class="navbar-logo" href="/"><img
+                        src="http://www.medic.sysrq.ru/sites/default/files/themepic/logo.png" width="100" height="100"
+                        alt="Логотип"></a>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/test">Пройти тест</a></li>
+                <li><a class="down">Справочники</a>
+                    <ul class="submenu">
+                        <li><a href="">Болезни</a></li>
+                        <li><a href="">Симптомы</a></li>
+                        <li><a href="">Лекарства</a></li>
+                    </ul>
+                </li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login" class="down">Войти</a>
+                    <ul class="submenu">
+                        <li><a href="/login">Войти</a></li>
+                        <li><a href="/registration">Регистрация</a></li>
+                    </ul>
+                </li>
+                <li sec:authorize="isAuthenticated()"><a class="down">Личный кабинет</a>
+                    <ul class="submenu">
+                        <li><a href="">Мои данные</a></li>
+                        <li><a href="">Пройденные тесты</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
