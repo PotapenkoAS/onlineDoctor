@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="display: flex">
-<p th:each="item:${tests}" th:text="${item.}"></p>
+    <p th:each="item:${tests}" th:utext="${item.symptoms}"></p>
 </div>
 </body>
 </html>

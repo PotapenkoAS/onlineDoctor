@@ -32,9 +32,6 @@
     </style>
 </head>
 <body>
-<a href="/login">login</a><br>
-<a href="/test">test</a>
-<a href="/tests" sec:authorize="authenticated"></a>
 <header>
     <div class="container">
         <nav>
@@ -42,14 +39,19 @@
                 <a class="navbar-logo" href="/"><img src="http://www.medic.sysrq.ru/sites/default/files/themepic/logo.png" width="100" height="100" alt="Логотип" ></a>
                 <li><a href="/">Главная</a></li>
                 <li><a href="/test">Пройти тест</a></li>
-                <li><a href="" class="down">Справочники</a>
+                <li><a class="down">Справочники</a>
                     <ul class="submenu">
                         <li><a href="">Болезни</a></li>
                         <li><a href="">Симптомы</a></li>
                         <li><a href="">Лекарства</a></li>
                     </ul>
                 </li>
-                <li><a href="" class="down">Личный кабинет</a>
+                <li sec:authorize="!isAuthenticated()"><a href="/login" class="down">Войти</a>
+                    <ul class="submenu">
+                        <li><a href="/registration">Регистрация</a></li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasRole('CLIENT')"><a class="down">Личный кабинет</a>
                     <ul class="submenu">
                         <li><a href="">Мои данные</a></li>
                         <li><a href="">Пройденные тесты</a></li>

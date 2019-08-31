@@ -20,13 +20,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/content/**").permitAll()
+                .antMatchers("/tests/**").authenticated()
                 .antMatchers("/test").hasRole("CLIENT")
                 .anyRequest().authenticated()
-                .and()//Указание формы логина
+                .and()//Указание url логина
                 .formLogin()
                 .loginPage("/login")
                 .failureForwardUrl("/login?error=true")
-                .and()
+                .and()//указание url логаута
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/home");
