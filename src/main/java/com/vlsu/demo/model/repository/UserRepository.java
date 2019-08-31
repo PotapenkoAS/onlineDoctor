@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-    boolean existsByLogin(String login);
+    boolean existsByLoginIs(String login);
 
     boolean existsByLoginAndPassword(String login, String password);
 

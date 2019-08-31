@@ -28,7 +28,7 @@ public class RegistrationService {
     public ArrayList<String> saveClient(Client client, User user) {
         ArrayList<String> errorList = userService.loginPasswordValidation(user.getLogin(), user.getPassword());
         if (errorList.isEmpty()) {
-            if (!ur.existsByLogin(user.getLogin())) {
+            if (!ur.existsByLoginIs(user.getLogin())) {
                 user = ur.save(user);
             } else {
                 errorList.add("Пользователь с таким именем уже существует");

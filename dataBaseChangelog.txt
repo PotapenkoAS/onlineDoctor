@@ -137,3 +137,5 @@ create table test_symptom
 		foreign key (test_id) references test (test_id)
 );
 
+
+alter table user modify login varchar(255) collate utf8mb4_0900_as_cs not null;

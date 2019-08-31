@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public String userExistsByLoginValidation(String login) {
-        if (ur.existsByLogin(login)) {
+        if (ur.existsByLoginIs(login)) {
             return "Пользователь с таким именем уже существует";
         }
         return null;
