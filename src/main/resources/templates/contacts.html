@@ -1,63 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="/content/style.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            background-image: url(https://html5book.ru/wp-content/uploads/2017/03/dulcineia-dias-195000.jpg);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            height: 100vh;
-            position:relative;
-        }
-        body:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            top: 0;
-            height: 19%;
-            width: 100%;
-            background: linear-gradient(45deg, rgba(0,0,0,0), rgba(255,255,255,.8));
-        }
-    </style>
+
 </head>
 <body>
-<header>
-    <div class="container">
-        <nav>
-            <ul class="topmenu">
-                <a class="navbar-logo" href="/"><img src="http://www.medic.sysrq.ru/sites/default/files/themepic/logo.png" width="100" height="100" alt="Логотип" ></a>
-                <li><a href="/">Главная</a></li>
-                <li><a href="/test">Пройти тест</a></li>
-                <li><a href="" class="down">Справочники</a>
-                    <ul class="submenu">
-                        <li><a href="">Болезни</a></li>
-                        <li><a href="">Симптомы</a></li>
-                        <li><a href="">Лекарства</a></li>
-                    </ul>
-                </li>
-                <li><a href="" class="down">Личный кабинет</a>
-                    <ul class="submenu">
-                        <li><a href="">Мои данные</a></li>
-                        <li><a href="">Пройденные тесты</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contacts">Контакты</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+<div th:insert="header.html :: header-fragment"></div>
 <br>
 <br>
 <div class="main">
     <div class="container">
-        <p>Чтобы связаться с нами напишите на почту ляляляляляляяляля</p>
+        <p>Чтобы связаться с нами напишите на почту: 'maxTrololo@gmail.mom'</p>
     </div>
 </div>
 </body>
