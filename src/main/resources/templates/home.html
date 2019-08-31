@@ -4,11 +4,102 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Diagnos-online</title>
+    <link href="/content/style.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; /*Устанавливает величину отступа от каждого края элемента.*/
+            background-image: url(https://html5book.ru/wp-content/uploads/2017/03/dulcineia-dias-195000.jpg);
+            /*background-image: url(http://www.medic.sysrq.ru/sites/default/files/themepic/background.jpg);
+            background-image: url("http://novaskin.org/wp-content/uploads/2018/01/%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D0%B0.jpg");
+            */ background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+            position:relative;
+        }
+        body:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            height: 19%;
+            width: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0), rgba(255,255,255,.8));
+        }
+    </style>
 </head>
 <body>
 <a href="/login">login</a><br>
 <a href="/test">test</a>
 <a href="/tests" sec:authorize="authenticated"></a>
+<header>
+    <div class="container">
+        <nav>
+            <ul class="topmenu">
+                <a class="navbar-logo" href="/"><img src="http://www.medic.sysrq.ru/sites/default/files/themepic/logo.png" width="100" height="100" alt="Логотип" ></a>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/test">Пройти тест</a></li>
+                <li><a href="" class="down">Справочники</a>
+                    <ul class="submenu">
+                        <li><a href="">Болезни</a></li>
+                        <li><a href="">Симптомы</a></li>
+                        <li><a href="">Лекарства</a></li>
+                    </ul>
+                </li>
+                <li><a href="" class="down">Личный кабинет</a>
+                    <ul class="submenu">
+                        <li><a href="">Мои данные</a></li>
+                        <li><a href="">Пройденные тесты</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<br>
+<br>
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <span class="TextHead"><p align="center">Добро пожаловать на Diagnos-online</p></span>
+            <span class="Text"><p align="center">Здесь вы можете посмотреть информацию о болезнях, их симптомах, лекарствах, способах лечения. А также пройти тест, указав беспокоющие вас симптомы, для постановки предварительного диагноза </p></span>
+            <div class="ClassTest">
+                <a href="/test"><img src="https://img.icons8.com/bubbles/2x/heart-with-pulse.png" width="200" height="200" alt="Прохождение теста" align="left"></a>
+                <span class="TextHome"><p><a href="/test">Тестирование</a></p></span>
+                <span class="Text"><p>Онлайн-диагностика. Проверьте свое здоровье прямо сейчас в режиме онлайн для выявления вероятных заболеваний</p></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="TextHead"><p align="center">Справочники</p></span>
+            <div class="col-1-3">
+                <a href="/test"><img src="https://img.icons8.com/color/452/treatment-plan.png" width="200" height="200" alt="Справочник болезней" align="center"></a>
+                <span class="TextHead"><p align="center">Справочник заболеваний</p></span>
+                <span class="Text"><p align="center"> Причины возникновения, симптомы, диагностика, лечение, правила оказания первой помощи.</p></span>
+            </div>
+            <div class="col-1-3">
+                <a href="/test"><img src="https://images.vexels.com/media/users/3/149861/isolated/preview/5a2ac8828568f40a50a25c7f2a36f6c0-headache-sickness-symptom-icon-by-vexels.png" width="200" height="200" alt="Справочник симптомов" align="center"></a>
+                <span class="TextHead"><p align="center">Справочник симптомов</p></span>
+                <span class="Text"><p align="center">Описание симптомов.</p></span>
+            </div>
+            <div class="col-1-3"> <!--https://activehealthcare.co.in/wp-content/uploads/2016/02/Routine-Tests.png-->
+                <a href="/test"><img src="https://rcl594.com/wp-content/uploads/2018/07/medical.png" width="265" height="200" alt="Справочник лекарств" align="center"></a>
+                <span class="TextHead"><p align="center">Справочник лекарств</p></span>
+                <span class="Text"><p align="center"> Заболевания, которые лечатся данным лекарством, примерная цена, состав.</p></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<folder>
+    <div class="container">
+        <div class="row">
+            <p>А тут у нас подвал</p>
+        </div>
+    </div>
+</folder>
 </body>
 </html>

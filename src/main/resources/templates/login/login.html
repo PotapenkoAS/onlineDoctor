@@ -3,9 +3,21 @@
 <head>
     <title>Login</title>
     <base href="/">
+    <link href="/content/style.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("http://novaskin.org/wp-content/uploads/2018/01/%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D0%B0.jpg");
+        }
+        a{
+            color: #fff;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
 </head>
-
 <body>
+<!--
 <br/><br/>
 <h1> Войти </h1>
 <form method="post">
@@ -18,8 +30,24 @@
         <p th:each="message:${errorList}" th:text="${message}"></p>
     </div>
 </form>
+-->
 
-
+<form method="post">
+    <div class="containerLogin">
+        <img src="https://img.icons8.com/bubbles/2x/heart-with-pulse.png">
+        <form>
+            <span class="TextLogin"><p>Авторизация</p></span>
+            <div class="dws-input">
+                <input type="text" name="username" placeholder="Введите логин">
+            </div>
+            <div class="dws-input">
+                <input type="password" name="password" placeholder="Введите пароль">
+            </div>
+            <input class="dws-submit" type="submit" name="submit" value="ВОЙТИ"><br />
+            <p color="red" th:each="message:${errorList}" th:text="${message}"></p>
+            <a href="/registration">Зарегистрироваться</a>
+        </form>
+    </div>
+</form>
 </body>
-
 </html>
