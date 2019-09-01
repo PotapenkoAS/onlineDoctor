@@ -1,6 +1,7 @@
 package com.vlsu.demo.controller;
 
 
+import com.vlsu.demo.model.entity.Admin;
 import com.vlsu.demo.model.entity.Client;
 import com.vlsu.demo.model.entity.User;
 import com.vlsu.demo.service.LoginService;
@@ -13,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 
 import javax.validation.Valid;
@@ -49,8 +49,18 @@ public class RegistrationController {
             model.addAttribute("error", error);
             return "login/registration";
         }
-        redirectAttributes.addFlashAttribute("user", user);
-        return "redirect:/post_registration";
+
+        if (!user.getRole().equals("ADMIN")) {
+            redirectAttributes.addFlashAttribute("user", user);
+            return "redirect:/post_registration";
+        } else {
+            if(regService.saveAdmin(new Admin(),user).isEmpty()){
+                return "home";
+            }else{
+                return "login/registration";
+            }
+        }
+
     }
 
     @GetMapping("/post_registration")
@@ -58,6 +68,7 @@ public class RegistrationController {
         model.addAttribute("user", user);
         return "login/post_registration";
     }
+
     @PostMapping("/post_registration")
     public String postPostRegistrationPage(Client client, String password, String login, Model model) {
         User user = new User(login, password, "CLIENT");

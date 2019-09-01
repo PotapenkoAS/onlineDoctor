@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Registration</title>
     <link href="/content/style.css" rel="stylesheet">
@@ -21,7 +22,15 @@
 <form method="post" th:object="${user}">
     <div class="containerLogin">
         <img src="https://img.icons8.com/bubbles/2x/heart-with-pulse.png">
-        <span class="TextLogin"><p>Регистрация Этап №1</p></span>
+        <div sec:authorize="!isAuthenticated() || hasRole('CLIENT')" class="TextLogin">
+            <p>Регистрация Этап №1</p>
+            <input name="role" type="text" value="CLIENT" hidden>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')" class="TextLogin">
+            <p>Новый администратор</p>
+            <input name="role" type="text" value="ADMIN" hidden>
+        </div>
+
         <div class="dws-input">
             <input name="login" placeholder='Логин' th:field="${user.login}" type="text">
             <p th:if="${#fields.hasErrors('login')}" th:errors="${user.login}" style="color:red"></p>

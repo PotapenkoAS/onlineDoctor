@@ -9,6 +9,7 @@ public class Admin {
     private User userByUserId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "admin_id", nullable = false)
     public int getAdminId() {
         return adminId;
