@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="/content/style.css" rel="stylesheet">
-    <script type="text/javascript" src="scripts/diseaseCatalog.js"></script>
+    <script type="text/javascript" src="scripts/catalog.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -12,15 +12,18 @@
     <div class="containerTest">
         <div class="row">
             <div th:each="item:${diseaseList}" th:id="${item.diseaseId}" onclick="swapVisibility(this.id)">
-                <a th:text="'Название: '+${item.diseaseName}" th:href="'/disease/'+${item.diseaseId}"></a>
+                Название:
+                <a th:text="${item.diseaseName}" th:href="'/disease/'+${item.diseaseId}"
+                   style="text-decoration: none; color: #4443fc"></a>
                 <p th:text="'Описание: '+${item.diseaseInfo}"></p>
                 <div th:id="'i'+${item.diseaseId}">
-                    <p>Симптомы: </p>
+                    <p th:if="${!item.symptomList.isEmpty()}">Симптомы: </p>
                     <a th:each="symptom:${item.symptomList}" th:text="${symptom.name} + '; '"
-                       th:href="'/symptom/'+${symptom.symptomId}"></a>
-                    <p>Медикаменты: </p>
+                       th:href="'/symptom/'+${symptom.symptomId}" style="text-decoration: none; color: #4443fc"></a>
+                    <p th:if="${!item.medicamentList.isEmpty()}">Медикаменты: </p>
                     <a th:each="medicament:${item.medicamentList}" th:text="${medicament.name} + '; '"
-                       th:href="'/medicament/'+${medicament.medicamentId}"></a>
+                       th:href="'/medicament/'+${medicament.medicamentId}"
+                       style="text-decoration: none; color: #4443fc"></a>
                 </div>
                 <hr>
             </div>
