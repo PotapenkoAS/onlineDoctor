@@ -79,4 +79,13 @@ public class Symptom {
     public void setTestSymptomsBySymptomId(Collection<TestSymptom> testSymptomsBySymptomId) {
         this.testSymptomsBySymptomId = testSymptomsBySymptomId;
     }
+
+    public Symptom() {
+    }
+
+    public Symptom(int symptomId, String name, String info) {
+        this.symptomId = symptomId;
+        this.name = name;
+        this.info = info;
+    }
 }

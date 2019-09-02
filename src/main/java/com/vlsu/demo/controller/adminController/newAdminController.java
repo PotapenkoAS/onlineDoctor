@@ -8,6 +8,7 @@ public class newAdminController {
 
     @GetMapping("new_admin")
     public String getNewAdmin(){
+
         return "login/registration";
     }
 }

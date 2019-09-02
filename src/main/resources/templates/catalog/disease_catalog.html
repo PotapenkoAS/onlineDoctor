@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="/content/style.css" rel="stylesheet">
+    <script type="text/javascript" src="scripts/diseaseCatalog.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -10,9 +11,19 @@
 <div class="main">
     <div class="containerTest">
         <div class="row">
-        <div th:each="item:${diseaseList}">
-
-        </div>
+            <div th:each="item:${diseaseList}" th:id="${item.diseaseId}" onclick="swapVisibility(this.id)">
+                <a th:text="'Название: '+${item.diseaseName}" th:href="'/disease/'+${item.diseaseId}"></a>
+                <p th:text="'Описание: '+${item.diseaseInfo}"></p>
+                <div th:id="'i'+${item.diseaseId}">
+                    <p>Симптомы: </p>
+                    <a th:each="symptom:${item.symptomList}" th:text="${symptom.name} + '; '"
+                       th:href="'/symptom/'+${symptom.symptomId}"></a>
+                    <p>Медикаменты: </p>
+                    <a th:each="medicament:${item.medicamentList}" th:text="${medicament.name} + '; '"
+                       th:href="'/medicament/'+${medicament.medicamentId}"></a>
+                </div>
+                <hr>
+            </div>
         </div>
     </div>
 </div>

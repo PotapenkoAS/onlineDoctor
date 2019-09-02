@@ -4,7 +4,8 @@ import com.vlsu.demo.model.entity.Disease;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface DiseaseRepository extends CrudRepository<Disease,Integer> {
-    Collection<Disease> findAll();
+    List<Disease> findAll();
 }
