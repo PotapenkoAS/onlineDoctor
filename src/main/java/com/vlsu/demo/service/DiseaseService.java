@@ -1,12 +1,11 @@
 package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.entity.Disease;
+import com.vlsu.demo.model.entity.DiseaseSymptom;
 import com.vlsu.demo.model.entity.Medicament;
 import com.vlsu.demo.model.entity.Symptom;
 import com.vlsu.demo.model.repository.DiseaseRepository;
-import com.vlsu.demo.model.restObject.DiseaseWithAllCommonInfo;
-import com.vlsu.demo.model.restObject.DiseaseWithMeds;
-import com.vlsu.demo.model.restObject.MedicamentWithRate;
+import com.vlsu.demo.model.restObject.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,6 +90,42 @@ public class DiseaseService {
         return mapToDiseaseWithRate(diseaseWithRates, medicaments);
     }
 
+    public DiseaseWithAllInfo getDiseaseWithAllInfoById(int diseaseId) {
+        DiseaseWithAllInfo result = new DiseaseWithAllInfo();
+        Disease disease = dr.findByDiseaseId(diseaseId);
+        List<SymptomWithRate> symptomList = disease.getDiseaseSymptomsByDiseaseId()
+                .stream()
+                .map(ds ->
+                        new SymptomWithRate(
+                                ds.getSymptomId()
+                                , ds.getSymptomBySymptomId().getName()
+                                , ds.getSymptomBySymptomId().getInfo()
+                                , ds.getRate()
+                                , ds.getMandatory()
+                                , ds.getDiseaseId()
+                        )
+                )
+                .collect(Collectors.toList());
+        List<MedicamentWithRate> medicamentList = disease.getDiseaseMedsByDiseaseId()
+                .stream()
+                .map(md ->
+                        new MedicamentWithRate(
+                                md.getMedicamentId()
+                                , md.getMedicamentByMedicamentId().getName()
+                                , md.getMedicamentByMedicamentId().getInfo()
+                                , md.getRate()
+                                , md.getDiseaseId()
+                        )
+                )
+                .collect(Collectors.toList());
+        result.setDiseaseId(disease.getDiseaseId());
+        result.setName(disease.getName());
+        result.setInfo(disease.getInfo());
+        result.setSymptomWithRateList(symptomList);
+        result.setMedicamentWithRateList(medicamentList);
+        return result;
+    }
+
     private List<Integer> collectDiseases(List list) {
         ArrayList<Integer> result = new ArrayList<>();
         for (Object o : list) {
@@ -98,6 +133,7 @@ public class DiseaseService {
         }
         return result;
     }
+
 
     // маппинг двух полученных выборок в единый лист
     private ArrayList<DiseaseWithMeds> mapToDiseaseWithRate(List diseasesList, List medicamentsList) {
