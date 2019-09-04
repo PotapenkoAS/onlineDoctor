@@ -1,7 +1,6 @@
 package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.entity.Disease;
-import com.vlsu.demo.model.entity.DiseaseSymptom;
 import com.vlsu.demo.model.entity.Medicament;
 import com.vlsu.demo.model.entity.Symptom;
 import com.vlsu.demo.model.repository.DiseaseRepository;
@@ -50,7 +49,7 @@ public class DiseaseService {
     //Получает все болезни по симптомам, остортированные по вероятностям
     public ArrayList<DiseaseWithMeds> getAllBySymptoms(String symptoms) { //symptoms- строка в виде "1,2,3"
         Query query = em.createNativeQuery("select distinct d.disease_id as diseaseId, d.name as diseaseName,d.info as diseaseInfo, " +
-                //case для того, чтобы правильно записывался 0, если не найдены проценты или количества
+                //IF для того, чтобы правильно записывался 0, если не найдены проценты или количества
                 "IF(ifNull(mand.mand_count,0) = 0, 0, (mand.mand_rate/mand.mand_count)) as mandatoryRate, " +
                 "IF(ifNull(opt.opt_count,0) = 0, 0, (opt.opt_rate/opt.opt_count)) as optionRate " +
                 "from online_doctor.Disease d " +
@@ -74,18 +73,18 @@ public class DiseaseService {
                 "on d.disease_id= opt.disease_id " +
                 "where ds.symptom_id in (:symptoms) " +
                 "order by mandatoryRate desc ");
-        //парсим строку в лист чисел, чтоб модно было подставить в качестве параметра в запрос
+        //парсим строку в лист чисел, чтоб можно было подставить в качестве параметра в запрос
         List<Integer> parsedSymptoms = Arrays.stream(symptoms.split(",")).map(Integer::parseInt).collect(Collectors.toList());
         query.setParameter("symptoms", parsedSymptoms);
         List diseaseWithRates = query.setMaxResults(10).getResultList();
         // запрос для получения медикаментов для каждой найденной болезни, сортированные по процентам
-        query = em.createQuery("select distinct m.medicamentId as medicamentId, m.name as name, m.info as info, dm.rate as rate, dm.diseaseId as diseaseId from Medicament m " +
+        query = em.createQuery("select distinct m.medicamentId as medicamentId, m.name as name, m.info as info, dm.rate as rate, dm.diseaseId as diseaseId " +
+                "from Medicament m " +
                 "inner join DiseaseMed dm on m.medicamentId = dm.medicamentId " +
                 "inner join DiseaseSymptom ds on ds.diseaseId = dm.diseaseId " +
-                "where ds.symptomId in (:symptoms) and ds.diseaseId in (:diseases)" +
+                "where ds.symptomId in (:symptoms) " +
                 "order by  diseaseId, rate");
         query.setParameter("symptoms", parsedSymptoms);
-        query.setParameter("diseases", collectDiseases(diseaseWithRates));
         List medicaments = query.getResultList();
         return mapToDiseaseWithRate(diseaseWithRates, medicaments);
     }
@@ -125,15 +124,6 @@ public class DiseaseService {
         result.setMedicamentWithRateList(medicamentList);
         return result;
     }
-
-    private List<Integer> collectDiseases(List list) {
-        ArrayList<Integer> result = new ArrayList<>();
-        for (Object o : list) {
-            result.add((int) (((Object[]) o)[0]));
-        }
-        return result;
-    }
-
 
     // маппинг двух полученных выборок в единый лист
     private ArrayList<DiseaseWithMeds> mapToDiseaseWithRate(List diseasesList, List medicamentsList) {
