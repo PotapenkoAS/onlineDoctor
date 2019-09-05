@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("symptom/**").permitAll()
                 .antMatchers("/tests/**").authenticated()
                 .antMatchers("/test").hasRole("CLIENT")
+                .antMatchers("/my_page").hasRole("CLIENT")
                 .anyRequest().authenticated()
                 .and()//Указание url логина
                 .formLogin()

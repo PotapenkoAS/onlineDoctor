@@ -6,10 +6,40 @@
     <title>First page</title>
     <link href="/content/style.css" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/my_page.js"></script>
 </head>
-
+<script>
+    document.onload = function () {
+        updateBodyMass(document.getElementById("heightP").value, document.getElementById("weightP").value);
+    }
+</script>
 <body>
 <div th:insert="header.html :: header-fragment"></div>
-</body>
 
+<div class="main">
+    <div class="containerTest">
+        <div class="row">
+            <h1 id="nameH" th:text="${client.getSurname()} + ' ' + ${client.getName()}"></h1>
+            <input id="nameI" type="text" style="display: none">
+            <input id="surnameI" type="text" style="display:none">
+            <input id="mailI" type="text" style="display: none">
+
+            <div class="contentText">
+                <img sec:authorize="hasRole('CLIENT')" class="round_small" src="/content/settings.png"
+                     alt="Редактировать"
+                     onclick="editor()">
+                <br><br>
+                <h2> Рост </h2>
+                <p id="heightP" th:text="${client.getHeight()}"> см </p>
+                <input id="heightI" type="text" style="display: none">
+                <h2> Вес </h2>
+                <p id="weightP" th:text="${client.getWeight()}"> кг </p>
+                <input id="weightI" type="text" style="display: none">
+                <h2> Индекс массы тела</h2>
+                <p id="bodyMass"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
