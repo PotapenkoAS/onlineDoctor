@@ -7,6 +7,7 @@ public class DiseaseMedKey implements Serializable {
     private Integer medicamentId;
 
     public int getDiseaseId() {
+
         return diseaseId;
     }
 

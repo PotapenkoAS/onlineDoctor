@@ -22,10 +22,9 @@
             <h1 id="nameH" th:text="${client.getSurname()} + ' ' + ${client.getName()}"></h1>
             <input id="nameI" type="text" style="display: none">
             <input id="surnameI" type="text" style="display:none">
-            <input id="mailI" type="text" style="display: none">
 
             <div class="contentText">
-                <img sec:authorize="hasRole('CLIENT')" class="round_small" src="/content/settings.png"
+                <img class="round_small" src="/content/settings.png"
                      alt="Редактировать"
                      onclick="editor()">
                 <br><br>

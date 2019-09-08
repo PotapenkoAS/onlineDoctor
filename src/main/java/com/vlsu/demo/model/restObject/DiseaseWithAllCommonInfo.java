@@ -52,9 +52,6 @@ public class DiseaseWithAllCommonInfo {
         this.symptomList = symptomList;
     }
 
-    public DiseaseWithAllCommonInfo() {
-    }
-
     public DiseaseWithAllCommonInfo(int diseaseId, String diseaseName, String diseaseInfo, List<Medicament> medicamentList, List<Symptom> symptomList) {
         this.diseaseId = diseaseId;
         this.diseaseName = diseaseName;

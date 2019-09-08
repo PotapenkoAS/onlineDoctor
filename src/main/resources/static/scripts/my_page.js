@@ -12,8 +12,8 @@ function editor() {
         nameH.style.display = "none";
         nameI.style.display = "block";
         surnameI.style.display = "block";
-        nameI.value = nameH.innerText.split(" ")[0];
-        surnameI.value = nameH.innerText.split(" ")[1];
+        nameI.value = nameH.innerText.split(" ")[1];
+        surnameI.value = nameH.innerText.split(" ")[0];
         heightP.style.display = "none";
         heightI.style.display = "block";
         heightI.value = heightP.innerText;
