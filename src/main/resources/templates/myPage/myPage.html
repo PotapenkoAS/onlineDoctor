@@ -9,8 +9,8 @@
     <script type="text/javascript" src="scripts/my_page.js"></script>
 </head>
 <script>
-    document.onload = function () {
-        updateBodyMass(document.getElementById("heightP").value, document.getElementById("weightP").value);
+    window.onload = function () {
+        updateBodyMass(document.getElementById("heightP").innerText, document.getElementById("weightP").innerText);
     }
 </script>
 <body>
@@ -20,8 +20,8 @@
     <div class="containerTest">
         <div class="row">
             <h1 id="nameH" th:text="${client.getSurname()} + ' ' + ${client.getName()}"></h1>
-            <input id="nameI" type="text" style="display: none">
             <input id="surnameI" type="text" style="display:none">
+            <input id="nameI" type="text" style="display: none">
 
             <div class="contentText">
                 <img class="round_small" src="/content/settings.png"
