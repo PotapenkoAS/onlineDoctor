@@ -21,9 +21,9 @@
                 <li><a href="/test">Пройти тест</a></li>
                 <li><a class="down">Справочники</a>
                     <ul class="submenu">
-                        <li><a href="">Болезни</a></li>
-                        <li><a href="">Симптомы</a></li>
-                        <li><a href="">Лекарства</a></li>
+                        <li><a href="/diseases">Болезни</a></li>
+                        <li><a href="/symptoms">Симптомы</a></li>
+                        <li><a href="/medicaments">Лекарства</a></li>
                     </ul>
                 </li>
                 <li sec:authorize="!isAuthenticated()"><a href="/login" class="down">Войти</a>
@@ -34,8 +34,8 @@
                 </li>
                 <li sec:authorize="isAuthenticated()"><a class="down">Личный кабинет</a>
                     <ul class="submenu">
-                        <li><a href="">Мои данные</a></li>
-                        <li><a href="">Пройденные тесты</a></li>
+                        <li><a href="/my_page">Мои данные</a></li>
+                        <li><a href="/tests">Пройденные тесты</a></li>
                     </ul>
                 </li>
                 <li><a href="/contacts">Контакты</a></li>

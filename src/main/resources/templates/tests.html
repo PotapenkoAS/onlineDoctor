@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/content/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div th:insert="header.html :: header-fragment"></div>
-<div style="display: flex">
-    <p th:each="item:${tests}" th:utext="${item.symptoms}"></p>
+<div class="main">
+    <div style="display: flex" class="containerTest">
+        <div class="row" th:each="item:${tests}">
+            <p th:utext="${item.symptoms.replaceAll('\n','<br>')}"></p>
+            <br>
+        </div>
+    </div>
 </div>
 </body>
 
