@@ -11,7 +11,7 @@
 <div class="main">
     <div class="containerTest">
         <div class="row">
-            <div th:each="item:${symptomsList}" th:id="${item.symptomId}" onclick="swapVisibility(this.id)">
+            <div th:each="item:${symptomsList}" th:id="${item.symptomId}" onclick="swapVisibility('i'+this.id)">
                 Название:
                 <a th:text="${item.symptomName}" th:href="'/disease/'+${item.symptomId}"
                    style="text-decoration: none; color: #4443fc"></a>

@@ -26,7 +26,7 @@ public class DiseaseController {
 
     @GetMapping("disease/{diseaseId}")
     public String getDisease(@PathVariable int diseaseId, Model model) {
-        model.addAttribute("diseaseWithAll", diseaseService.getDiseaseWithAllInfoById(diseaseId));
+        model.addAttribute("disease", diseaseService.getDiseaseWithAllInfoById(diseaseId));
         return "catalog/disease";
     }
 }

@@ -1,8 +1,7 @@
 function swapVisibility(elId) {
-    var trueElId = "i" + elId;
-    if (document.getElementById(trueElId).style.display === "none") {
-        document.getElementById(trueElId).style.display = "block";
+    if (document.getElementById(elId).style.display === "none") {
+        document.getElementById(elId).style.display = "block";
     } else {
-        document.getElementById(trueElId).style.display = "none";
+        document.getElementById(elId).style.display = "none";
     }
 }

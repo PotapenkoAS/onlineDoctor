@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="/content/style.css" rel="stylesheet">
-    <script type="text/javascript" src="scripts/catalog.js"></script>
+    <script type="text/javascript" src="/scripts/catalog.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -11,7 +11,28 @@
 <div class="main">
     <div class="containerTest">
         <div class="row">
-
+            <h2 th:text="${disease.name}"></h2>
+            <p th:text="${disease.info}"></p>
+        </div>
+        <div style="display: flex">
+            <div class="row" style="min-width: 50%">
+                <div th:each="item:${disease.symptomWithRateList}"
+                     th:onclick="'swapVisibility(\'s'+ ${item.symptomId} +'\')'">
+                    <a th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
+                       style="text-decoration: none; color: #4443fc"></a>
+                    <span th:text="' - '+ ${item.rate}"></span>
+                    <span th:id="'s'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
+                </div>
+            </div>
+            <div class="row" style="min-width: 50%">
+                <div th:each="item:${disease.medicamentWithRateList}"
+                     th:onclick="'swapVisibility(\'m'+${item.medicamentId}+'\')'">
+                    <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
+                          style="text-decoration: none; color: #4443fc"></span>
+                    <span th:text="' - '+ ${item.rate}"></span>
+                    <span th:id="'m'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
