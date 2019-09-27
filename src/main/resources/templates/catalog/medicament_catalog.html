@@ -6,9 +6,11 @@
     <link href="/content/style.css" rel="stylesheet">
     <title>Title</title>
 </head>
+
 <body>
-<div th:insert="header.html :: header-fragment"></div>
+<div th:insert="header.html :: header-fragment"></div><br>
 <div class="main">
+    <br><br><br>
     <div class="containerTest">
         <div class="row">
             <div th:each="item:${meds}" th:id="${item.medicamentId}" onclick="swapVisibility('i'+this.id)">

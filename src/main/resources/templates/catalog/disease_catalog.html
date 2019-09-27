@@ -9,6 +9,7 @@
 <body>
 <div th:insert="header.html :: header-fragment"></div>
 <div class="main">
+    <br><br><br>
     <div class="containerTest">
         <div class="row">
             <div th:each="item:${diseaseList}" th:id="${item.diseaseId}" onclick="swapVisibility('i'+this.id)">

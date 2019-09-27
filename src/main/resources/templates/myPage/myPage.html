@@ -15,19 +15,19 @@
 </script>
 <body>
 <div th:insert="header.html :: header-fragment"></div>
-
+<br>
+<br>
 <div class="main">
+    <br>
     <div class="containerTest">
         <div class="row">
             <h1 id="nameH" th:text="${client.getSurname()} + ' ' + ${client.getName()}"></h1>
-            <input id="surnameI" type="text" style="display:none">
-            <input id="nameI" type="text" style="display: none">
-
             <div class="contentText">
-                <img class="round_small" src="/content/settings.png"
+                <input id="surnameI" type="text" style="display:none">
+                <input id="nameI" type="text" style="display: none">
+                <img class="round_small" src="http://download.seaicons.com/icons/dtafalonso/android-l/512/Settings-L-icon.png"
                      alt="Редактировать"
                      onclick="editor()">
-                <br><br>
                 <h2> Рост </h2>
                 <p id="heightP" th:text="${client.getHeight()}"> см </p>
                 <input id="heightI" type="text" style="display: none">
