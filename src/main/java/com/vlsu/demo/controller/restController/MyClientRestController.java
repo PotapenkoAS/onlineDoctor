@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyClientRestController {
-    ClientService clientService;
-    UserService userService;
+    private ClientService clientService;
+    private UserService userService;
 
     @Autowired
     public MyClientRestController(ClientService clientService, UserService userService) {

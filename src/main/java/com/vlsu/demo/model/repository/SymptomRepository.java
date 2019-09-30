@@ -5,7 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface SymptomRepository extends CrudRepository<Symptom,Integer> {
+public interface SymptomRepository extends CrudRepository<Symptom, Integer> {
     List<Symptom> findAll();
+
     List<Symptom> findAllBySymptomIdIsIn(List<Integer> ids);
 }
