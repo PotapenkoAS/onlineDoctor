@@ -8,9 +8,10 @@
 <body>
 <div th:insert="header.html :: header-fragment"></div>
 <div class="main">
-    <div style="display: flex" class="containerTest">
+    <div class="containerTest">
         <div class="row" th:each="item:${tests}">
             <p th:utext="${item.symptoms.replaceAll('\n','<br>')}"></p>
+            <p th:utext="${item.date}"></p>
             <br>
         </div>
     </div>

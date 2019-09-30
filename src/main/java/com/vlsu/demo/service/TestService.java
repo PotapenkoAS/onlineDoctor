@@ -66,7 +66,7 @@ public class TestService {
         List<Symptom> list = symptomService.getAllInIdList(parsedSymptoms);
         StringBuilder result = new StringBuilder();
         for(Symptom item: list){
-            result.append("Название: ").append(item.getName()).append("; Описание: ").append(item.getInfo()).append(".\n");
+            result.append(item.getName()).append("; ").append(item.getInfo()).append(".\n");
         }
         return result.toString();
     }
