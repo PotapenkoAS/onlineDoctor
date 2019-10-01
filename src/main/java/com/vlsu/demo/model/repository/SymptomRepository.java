@@ -9,4 +9,6 @@ public interface SymptomRepository extends CrudRepository<Symptom, Integer> {
     List<Symptom> findAll();
 
     List<Symptom> findAllBySymptomIdIsIn(List<Integer> ids);
+
+    Symptom findBySymptomId(int id);
 }

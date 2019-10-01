@@ -9,9 +9,11 @@ function swapVisibility(elId) {
     }
 }
 
-function Symptom(id, rate) {
-    this.id = id;
+function Symptom(symptomId, rate, mandatory) {
+    this.symptomId = symptomId;
+    this.diseaseId = diseaseId;
     this.rate = rate;
+    this.mandatory = mandatory;
 }
 
 function DiseaseSymptom(diseaseId, symptomId) {
@@ -24,8 +26,9 @@ function DiseaseMed(diseaseId, medId) {
     this.medId = medId;
 }
 
-function Medicament(id, rate) {
-    this.id = id;
+function Medicament(medicamentId, rate) {
+    this.medicamentId = medicamentId;
+    this.diseaseId = diseaseId;
     this.rate = rate;
 }
 
@@ -44,6 +47,7 @@ function editor() {
         symRate.value = null;
         symRate.style.display = "none";
         $("#sym_save_button").style.display = "none";
+        $("#sym_man").style.display = "none";
 
         let medSelect = $("#med_select");
         medSelect.value = null;
@@ -87,6 +91,7 @@ function showNewSym() {
     $("#sym_span").style.display = "block";
     $("#sym_rate").style.display = "block";
     $("#sym_save_button").style.display = "block";
+    $("#sym_man").style.display = "block";
 }
 
 function showNewMed() {
@@ -94,6 +99,14 @@ function showNewMed() {
     $("#med_span").style.display = "block";
     $("#med_rate").style.display = "block";
     $("#med_save_button").style.display = "block";
+}
+
+function hideSymError() {
+    $("#sym_error").style.display = "none";
+}
+
+function hideMedError() {
+    $("#med_error").style.display = "none";
 }
 
 function deleteSym(id) {
@@ -132,14 +145,19 @@ function collectOptions(data) {
 function saveSymptom() {
     let symSelect = $("#sym_select");
     let symRate = $("#sym_rate");
+    let mandatory = 1;
     if (symSelect.value == null || symSelect.value === "" || symRate.value == null || symRate <= 0) {
         $("#sym_error").style.display = "block";
         return
     }
-    let symptom = new Symptom(symSelect.id, symRate.value);
+    if ($("#sym_man").checked) {
+        mandatory = 0;
+    }
+    let symptom = new Symptom(symSelect.id, symRate.value, mandatory);
     $.ajax({
         type: "POST",
         url: "/rest/symptom",
+        dataType:"JSON",
         data: JSON.stringify(symptom),
         success: function (data) {
             let j = -1;

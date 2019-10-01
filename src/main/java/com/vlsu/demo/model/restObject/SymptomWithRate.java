@@ -6,7 +6,7 @@ public class SymptomWithRate {
     private String info;
     private double rate;
     private byte mandatory;
-    private int DiseaseId;
+    private int diseaseId;
 
 
     public int getSymptomId() {
@@ -50,11 +50,11 @@ public class SymptomWithRate {
     }
 
     public int getDiseaseId() {
-        return DiseaseId;
+        return diseaseId;
     }
 
     public void setDiseaseId(int diseaseId) {
-        DiseaseId = diseaseId;
+        this.diseaseId = diseaseId;
     }
 
     public SymptomWithRate() {
@@ -66,6 +66,6 @@ public class SymptomWithRate {
         this.info = info;
         this.rate = rate;
         this.mandatory = mandatory;
-        DiseaseId = diseaseId;
+        this.diseaseId = diseaseId;
     }
 }

@@ -71,4 +71,8 @@ public class MedicamentService {
         query.setParameter("medicamentId", medicamentId);
         query.executeUpdate();
     }
+
+    public Medicament getById(int medicamentId) {
+        return mr.findByMedicamentId(medicamentId);
+    }
 }

@@ -30,7 +30,7 @@
         </div>
         <div style="display: flex">
 
-            <div id="sym_div" class="row" style="min-width: 50%">
+            <div id="sym_div" class="row">
                 <img id="sym_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewSym()">
                 <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
@@ -41,18 +41,20 @@
                     <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
                           style="text-decoration: none; color: #4443fc"></span>
                     <span th:text="' - '+ ${item.rate}"></span>
+                    <span th:if="${item.isMandatory()==0}"><br>Обязательный</span>
                     <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
                 </div>
                 <div style="display: inline">
-                    <select id="sym_select" style="display:none"></select>
+                    <select id="sym_select" style="display:none" onchange="hideSymError()"></select>
                     <span id="sym_span" style="display: none">-</span>
-                    <input id="sym_rate" type="number" style="display: none">
+                    <input id="sym_rate" type="number" style="display: none" onchange="hideSymError()">
+                    <input id="sym_man" type="checkbox">
                     <p id="sym_error" style="display: none; color: #ff4e3f">Неверные данные</p>
                     <button id="sym_save_button" onclick="saveSymptom()">Сохранить</button>
                 </div>
             </div>
 
-            <div id="med_div" class="row" style="min-width: 50%">
+            <div id="med_div" class="row">
                 <img id="med_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewMed()">
                 <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
@@ -66,9 +68,9 @@
                     <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
                 </div>
                 <div style="display:inline">
-                    <select id="med_select" style="display:none"></select>
+                    <select id="med_select" style="display:none" onchange="hideMedError()"></select>
                     <span id="med_span" style="display: none">-</span>
-                    <input id="med_rate" type="number" style="display: none">
+                    <input id="med_rate" type="number" style="display: none" onchange="hideMedError()">
                     <p id="med_error" style="display: none; color: #ff4e3f">Неверные данные</p>
                     <button id="med_save_button" onclick="saveMed()">Сохранить</button>
                 </div>

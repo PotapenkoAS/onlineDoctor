@@ -1,12 +1,14 @@
 package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.entity.Disease;
+import com.vlsu.demo.model.entity.DiseaseSymptom;
 import com.vlsu.demo.model.entity.Symptom;
 import com.vlsu.demo.model.repository.SymptomRepository;
 import com.vlsu.demo.model.restObject.SymptomWithDiseases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -70,13 +72,8 @@ public class SymptomService {
         return result;
     }
 
-    @Transactional
-    public void deleteSymptomFromDisease(int diseaseId, int symptomId) {
-        Query query = em.createQuery("delete from DiseaseSymptom ds " +
-                "where ds.diseaseId=:diseaseId and ds.symptomId=:symptomId");
-        query.setParameter("diseaseId", diseaseId);
-        query.setParameter("symptomId", symptomId);
-        query.executeUpdate();
-    }
 
+    public Symptom getById(int symptomId) {
+        return symptomRepository.findBySymptomId(symptomId);
+    }
 }

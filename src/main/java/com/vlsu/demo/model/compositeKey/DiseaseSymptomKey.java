@@ -21,4 +21,9 @@ public class DiseaseSymptomKey implements Serializable {
     public void setSymptomId(int symptomId) {
         this.symptomId = symptomId;
     }
+
+    public DiseaseSymptomKey(int diseaseId, int symptomId) {
+        this.diseaseId = diseaseId;
+        this.symptomId = symptomId;
+    }
 }
