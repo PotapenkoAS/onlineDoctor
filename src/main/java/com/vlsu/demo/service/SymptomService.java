@@ -1,14 +1,11 @@
 package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.entity.Disease;
-import com.vlsu.demo.model.entity.DiseaseSymptom;
 import com.vlsu.demo.model.entity.Symptom;
 import com.vlsu.demo.model.repository.SymptomRepository;
 import com.vlsu.demo.model.restObject.SymptomWithDiseases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
