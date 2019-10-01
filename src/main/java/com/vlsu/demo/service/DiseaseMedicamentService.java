@@ -24,4 +24,9 @@ public class DiseaseMedicamentService {
         dm.setRate(rate);
         return dmr.save(dm);
     }
+
+    @Transactional
+    public void deleteMedicamentFromDisease(int diseaseId, int medicamentId) {
+        dmr.deleteByDiseaseIdAndMedicamentId(diseaseId, medicamentId);
+    }
 }

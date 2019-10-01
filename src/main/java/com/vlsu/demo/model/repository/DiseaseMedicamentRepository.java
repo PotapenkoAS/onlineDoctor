@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface DiseaseMedicamentRepository extends CrudRepository<DiseaseMed, DiseaseMedKey> {
     List<DiseaseMed> findAll();
+
+    void deleteByDiseaseIdAndMedicamentId(int diseaseId, int medicamentId);
 }

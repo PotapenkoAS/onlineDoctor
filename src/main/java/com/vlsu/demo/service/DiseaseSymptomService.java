@@ -21,7 +21,7 @@ public class DiseaseSymptomService {
 
     @Transactional
     public void deleteSymptomFromDisease(int diseaseId, int symptomId) {
-        dsr.deleteById(new DiseaseSymptomKey(diseaseId,symptomId));
+        dsr.deleteByDiseaseIdAndSymptomId(diseaseId,symptomId);
     }
 
     @Transactional

@@ -11,4 +11,6 @@ import java.util.List;
 public interface DiseaseSymptomRepository extends CrudRepository<DiseaseSymptom, DiseaseSymptomKey> {
     List<DiseaseSymptom> findAll();
 
+    void deleteByDiseaseIdAndSymptomId(int diseaseId, int symptomId);
+
 }

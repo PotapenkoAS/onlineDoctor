@@ -13,7 +13,6 @@ import com.vlsu.demo.service.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -44,27 +43,28 @@ public class CatalogRestController {
         return medicamentService.getAll();
     }
 
-    @DeleteMapping("/med")
-    public void deleteMedicament(int diseaseId, int medicamentId) {
-        medicamentService.deleteMedicamentFromDisease(diseaseId, medicamentId);
+    @DeleteMapping("/symptom")
+    public void deleteSymptom(@RequestBody DiseaseSymptom request) {
+        diseaseSymptomService.deleteSymptomFromDisease(request.getDiseaseId(), request.getSymptomId());
     }
 
-    @DeleteMapping("/symptom")
-    public void deleteSymptom(int diseaseId, int symptomId) {
-        diseaseSymptomService.deleteSymptomFromDisease(diseaseId, symptomId);
+    @DeleteMapping("/med")
+    public void deleteMedicament(@RequestBody DiseaseMed request) {
+        diseaseMedicamentService.deleteMedicamentFromDisease(request.getDiseaseId(), request.getMedicamentId());
     }
 
     @PostMapping("/symptom")
-    public SymptomWithRate saveSymptom(int symptomId, int diseaseId, double rate, byte mandatory) {
-        DiseaseSymptom ds = diseaseSymptomService.saveDiseaseSymptom(symptomId, diseaseId, rate, mandatory);
-        Symptom symptom = symptomService.getById(symptomId);
+    public SymptomWithRate saveSymptom(@RequestBody DiseaseSymptom request) {
+        DiseaseSymptom ds = diseaseSymptomService.saveDiseaseSymptom(request.getSymptomId(),
+                request.getDiseaseId(), request.getRate(), request.getMandatory());
+        Symptom symptom = symptomService.getById(request.getSymptomId());
         return new SymptomWithRate(ds.getSymptomId(), symptom.getName(), symptom.getInfo(), ds.getRate(), ds.getMandatory(), ds.getDiseaseId());
     }
 
     @PostMapping("/medicament")
-    public MedicamentWithRate saveMedicament(int medicamentId, int diseaseId, double rate){
-        DiseaseMed dm = diseaseMedicamentService.saveDiseaseMedicament(medicamentId,diseaseId,rate);
-        Medicament medicament = medicamentService.getById(medicamentId);
-        return new MedicamentWithRate(medicament.getMedicamentId(),medicament.getName(),medicament.getInfo(),dm.getRate(),dm.getDiseaseId());
+    public MedicamentWithRate saveMedicament(@RequestBody DiseaseMed request) {
+        DiseaseMed dm = diseaseMedicamentService.saveDiseaseMedicament(request.getMedicamentId(), request.getDiseaseId(), request.getRate());
+        Medicament medicament = medicamentService.getById(request.getMedicamentId());
+        return new MedicamentWithRate(medicament.getMedicamentId(), medicament.getName(), medicament.getInfo(), dm.getRate(), dm.getDiseaseId());
     }
 }

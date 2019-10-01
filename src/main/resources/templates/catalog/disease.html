@@ -36,7 +36,7 @@
                 <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
                      onclick="swapVisibility('s'+this.id)">
                     <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small sym_minus" style="display:none"
+                         class="round_extra_small sym_minus" style="display:none; float: left"
                          th:onclick="'deleteSym('+${item.symptomId}+')'">
                     <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
                           style="text-decoration: none; color: #4443fc"></span>
@@ -45,7 +45,7 @@
                     <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
                     <hr>
                 </div>
-                <div style="display: inline">
+                <div style="display: flex">
                     <select id="sym_select" style="display:none" onchange="hideSymError()"></select>
                     <span id="sym_span" style="display: none">-</span>
                     <input id="sym_rate" type="number" style="display: none" onchange="hideSymError()">
@@ -61,7 +61,7 @@
                 <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
                      onclick="swapVisibility('s'+this.id)">
                     <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small med_minus" style="display:none"
+                         class="round_extra_small med_minus" style="display:none; float: left"
                          th:onclick="'deleteMed('+${item.medicamentId}+')'">
                     <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
                           style="text-decoration: none; color: #4443fc"></span>
@@ -69,7 +69,7 @@
                     <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
                     <hr>
                 </div>
-                <div style="display:inline">
+                <div style="display:flex">
                     <select id="med_select" style="display:none" onchange="hideMedError()"></select>
                     <span id="med_span" style="display: none">-</span>
                     <input id="med_rate" type="number" style="display: none" onchange="hideMedError()">

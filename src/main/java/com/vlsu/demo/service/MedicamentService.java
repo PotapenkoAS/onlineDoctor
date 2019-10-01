@@ -61,15 +61,6 @@ public class MedicamentService {
         return result;
     }
 
-    @Transactional
-    public void deleteMedicamentFromDisease(int diseaseId, int medicamentId) {
-        Query query = em.createQuery("delete from DiseaseMed dm " +
-                "where dm.diseaseId=:diseaseId and dm.medicamentId=:medicamentId");
-        query.setParameter("diseaseId", diseaseId);
-        query.setParameter("medicamentId", medicamentId);
-        query.executeUpdate();
-    }
-
     public Medicament getById(int medicamentId) {
         return mr.findByMedicamentId(medicamentId);
     }
