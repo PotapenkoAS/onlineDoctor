@@ -1,5 +1,8 @@
 package com.vlsu.demo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -62,7 +65,8 @@ public class Symptom {
         return result;
     }
 
-    @OneToMany(mappedBy = "symptomBySymptomId",fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "symptomBySymptomId")
     public Collection<DiseaseSymptom> getDiseaseSymptomsBySymptomId() {
         return diseaseSymptomsBySymptomId;
     }
@@ -71,6 +75,7 @@ public class Symptom {
         this.diseaseSymptomsBySymptomId = diseaseSymptomsBySymptomId;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "symptomBySymptomId")
     public Collection<TestSymptom> getTestSymptomsBySymptomId() {
         return testSymptomsBySymptomId;
@@ -78,14 +83,5 @@ public class Symptom {
 
     public void setTestSymptomsBySymptomId(Collection<TestSymptom> testSymptomsBySymptomId) {
         this.testSymptomsBySymptomId = testSymptomsBySymptomId;
-    }
-
-    public Symptom() {
-    }
-
-    public Symptom(int symptomId, String name, String info) {
-        this.symptomId = symptomId;
-        this.name = name;
-        this.info = info;
     }
 }

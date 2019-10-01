@@ -1,5 +1,6 @@
 package com.vlsu.demo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vlsu.demo.model.compositeKey.DiseaseMedKey;
 
 import javax.persistence.*;
@@ -69,7 +70,8 @@ public class DiseaseMed {
         return result;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "disease_id", referencedColumnName = "disease_id", nullable = false, insertable = false, updatable = false)
     public Disease getDiseaseByDiseaseId() {
         return diseaseByDiseaseId;
@@ -79,7 +81,8 @@ public class DiseaseMed {
         this.diseaseByDiseaseId = diseaseByDiseaseId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "medicament_id", referencedColumnName = "medicament_id", nullable = false, insertable = false, updatable = false)
     public Medicament getMedicamentByMedicamentId() {
         return medicamentByMedicamentId;

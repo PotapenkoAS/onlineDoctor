@@ -2,10 +2,8 @@ package com.vlsu.demo.service;
 
 import com.vlsu.demo.model.entity.Disease;
 import com.vlsu.demo.model.entity.Medicament;
-import com.vlsu.demo.model.entity.Symptom;
 import com.vlsu.demo.model.repository.MedicamentRepository;
 import com.vlsu.demo.model.restObject.MedsWithDiseases;
-import com.vlsu.demo.model.restObject.SymptomWithDiseases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +28,7 @@ public class MedicamentService {
         this.mr = mr;
     }
 
-    public Collection<Medicament> getAll() {
+    public List<Medicament> getAll() {
         return mr.findAll();
     }
 

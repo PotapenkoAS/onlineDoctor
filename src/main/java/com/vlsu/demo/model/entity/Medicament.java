@@ -1,5 +1,7 @@
 package com.vlsu.demo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -61,6 +63,7 @@ public class Medicament {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "medicamentByMedicamentId")
     public Collection<DiseaseMed> getDiseaseMedsByMedicamentId() {
         return diseaseMedsByMedicamentId;

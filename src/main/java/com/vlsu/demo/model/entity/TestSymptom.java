@@ -13,6 +13,14 @@ public class TestSymptom {
     private Test testByTestId;
     private Symptom symptomBySymptomId;
 
+    public TestSymptom(int testId, int symptomId) {
+        this.testId = testId;
+        this.symptomId = symptomId;
+    }
+
+    public TestSymptom(){
+    }
+
     @Basic
     @Id
     @Column(name = "test_id")
@@ -51,14 +59,6 @@ public class TestSymptom {
         int result = testId;
         result = 31 * result + symptomId;
         return result;
-    }
-
-    public TestSymptom(int testId, int symptomId) {
-        this.testId = testId;
-        this.symptomId = symptomId;
-    }
-
-    public TestSymptom(){
     }
 
     @ManyToOne

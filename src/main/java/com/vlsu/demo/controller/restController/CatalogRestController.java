@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest")
@@ -34,12 +35,12 @@ public class CatalogRestController {
 
 
     @GetMapping("/symptoms")
-    public Collection<Symptom> getSymptoms() {
+    public List<Symptom> getSymptoms() {
         return symptomService.getAll();
     }
 
     @GetMapping("/meds")
-    public Collection<Medicament> getMedicaments() {
+    public List<Medicament> getMedicaments() {
         return medicamentService.getAll();
     }
 
