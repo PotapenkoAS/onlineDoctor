@@ -82,7 +82,7 @@ public class DiseaseSymptom {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "symptom_id", referencedColumnName = "symptom_id", nullable = false, insertable = false, updatable = false)
     public Symptom getSymptomBySymptomId() {
         return symptomBySymptomId;
@@ -92,7 +92,7 @@ public class DiseaseSymptom {
         this.symptomBySymptomId = symptomBySymptomId;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_id", referencedColumnName = "disease_id", nullable = false, insertable = false, updatable = false)
     public Disease getDiseaseByDiseaseId() {
         return diseaseByDiseaseId;

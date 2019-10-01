@@ -22,4 +22,7 @@ public class DiseaseMedKey implements Serializable {
     public void setMedicamentId(Integer medicamentId) {
         this.medicamentId = medicamentId;
     }
+
+    public DiseaseMedKey() {
+    }
 }

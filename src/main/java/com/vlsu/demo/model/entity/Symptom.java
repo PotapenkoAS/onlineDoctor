@@ -62,7 +62,7 @@ public class Symptom {
         return result;
     }
 
-    @OneToMany(mappedBy = "symptomBySymptomId")
+    @OneToMany(mappedBy = "symptomBySymptomId",fetch = FetchType.LAZY)
     public Collection<DiseaseSymptom> getDiseaseSymptomsBySymptomId() {
         return diseaseSymptomsBySymptomId;
     }

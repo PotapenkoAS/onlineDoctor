@@ -33,80 +33,78 @@ function Medicament(medicamentId, rate) {
 }
 
 function editor() {
-    let symMinus = $(".sym_minus");
-    let medMinus = $(".med_minus");
     if (isEdit) {
-        symMinus.style.display = "none";
-        medMinus.style.display = "none";
+        $(".sym_minus").hide();
+        $(".med_minus").hide();
 
-        let symSelect = $("#sym_select");
+        let symSelect = $("#sym_select")[0];
         symSelect.value = null;
         symSelect.style.display = "none";
-        $("#sym_span").style.display = "none";
-        let symRate = $("#sym_rate");
+        $("#sym_span")[0].style.display = "none";
+        let symRate = $("#sym_rate")[0];
         symRate.value = null;
         symRate.style.display = "none";
-        $("#sym_save_button").style.display = "none";
-        $("#sym_man").style.display = "none";
+        $("#sym_save_button")[0].style.display = "none";
+        $("#sym_man")[0].style.display = "none";
 
-        let medSelect = $("#med_select");
+        let medSelect = $("#med_select")[0];
         medSelect.value = null;
         medSelect.style.display = "none";
-        $("#med_span").style.display = "none";
-        let medRate = $("#med_rate");
+        $("#med_span")[0].style.display = "none";
+        let medRate = $("#med_rate")[0];
         medRate.value = null;
         medRate.style.display = "none";
-        $("#med_save_button").style.display = "none";
+        $("#med_save_button")[0].style.display = "none";
 
         isEdit = false;
-        return
+    } else {
+        isEdit = true;
+        $(".sym_minus").show();
+        $(".med_minus").show();
+        $.ajax({
+                type: "GET",
+                url: "/rest/symptoms",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#sym_select")[0].html(collectOptions(data).join(''));
+                    $("#sym_plus")[0].style.display = "block";
+                }
+            }
+        );
+        $.ajax({
+                type: "GET",
+                url: "/rest/meds",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#med_select")[0].html(collectOptions(data).join(''));
+                    $("#med_plus")[0].style.display = "block";
+                }
+            }
+        )
     }
-    isEdit = true;
-    symMinus.style.display = "block";
-    medMinus.style.display = "block";
-    $.ajax({
-            type: "GET",
-            url: "/rest/get_symptoms",
-            dataType: "JSON",
-            success: function (data) {
-                $("#sym_select").html(collectOptions(data).join(''));
-                $("#sym_plus").style.display = "block";
-            }
-        }
-    );
-    $.ajax({
-            type: "GET",
-            url: "/rest/get_meds",
-            dataType: "JSON",
-            success: function (data) {
-                $("#med_select").html(collectOptions(data).join(''));
-                $("#med_plus").style.display = "block";
-            }
-        }
-    )
 }
 
 function showNewSym() {
-    $("#sym_select").style.display = "block";
-    $("#sym_span").style.display = "block";
-    $("#sym_rate").style.display = "block";
-    $("#sym_save_button").style.display = "block";
-    $("#sym_man").style.display = "block";
+    $("#sym_select")[0].style.display = "block";
+    $("#sym_span")[0].style.display = "block";
+    $("#sym_rate")[0].style.display = "block";
+    $("#sym_save_button")[0].style.display = "block";
+    $("#sym_man")[0].style.display = "block";
 }
 
 function showNewMed() {
-    $("#med_select").style.display = "block";
-    $("#med_span").style.display = "block";
-    $("#med_rate").style.display = "block";
-    $("#med_save_button").style.display = "block";
+    $("#med_select")[0].style.display = "block";
+    $("#med_span")[0].style.display = "block";
+    $("#med_rate")[0].style.display = "block";
+    $("#med_save_button")[0].style.display = "block";
 }
 
 function hideSymError() {
-    $("#sym_error").style.display = "none";
+    $("#sym_error")[0].style.display = "none";
 }
 
 function hideMedError() {
-    $("#med_error").style.display = "none";
+    $("#med_error")[0].style.display = "none";
 }
 
 function deleteSym(id) {
@@ -143,21 +141,21 @@ function collectOptions(data) {
 }
 
 function saveSymptom() {
-    let symSelect = $("#sym_select");
-    let symRate = $("#sym_rate");
+    let symSelect = $("#sym_select")[0];
+    let symRate = $("#sym_rate")[0];
     let mandatory = 1;
     if (symSelect.value == null || symSelect.value === "" || symRate.value == null || symRate <= 0) {
-        $("#sym_error").style.display = "block";
+        $("#sym_error")[0].style.display = "block";
         return
     }
-    if ($("#sym_man").checked) {
+    if ($("#sym_man")[0].checked) {
         mandatory = 0;
     }
     let symptom = new Symptom(symSelect.id, symRate.value, mandatory);
     $.ajax({
         type: "POST",
         url: "/rest/symptom",
-        dataType:"JSON",
+        dataType: "JSON",
         data: JSON.stringify(symptom),
         success: function (data) {
             let j = -1;
@@ -171,7 +169,7 @@ function saveSymptom() {
                 '                    <span> - ' + data.rate + '</span>' +
                 '                    <span id="\'ss\'+' + data.symptomId + '" style="display: none">' + data.info + '</span>' +
                 '                </div>';
-            let symDiv = $("#sym_div");
+            let symDiv = $("#sym_div")[0];
             symDiv.html(symDiv.html, arr.join(''));
             symSelect.value = null;
             symRate.value = null;
@@ -180,10 +178,10 @@ function saveSymptom() {
 }
 
 function saveMed() {
-    let medSelect = $("#med_select");
-    let medRate = $("#med_rate");
+    let medSelect = $("#med_select")[0];
+    let medRate = $("#med_rate")[0];
     if (medSelect.value == null || medSelect.value === "" || medRate.value == null || medRate <= 0) {
-        $("#med_error").style.display = "block";
+        $("#med_error")[0].style.display = "block";
         return
     }
     let medicament = new Medicament(medSelect.id, medRate.value);
@@ -203,7 +201,7 @@ function saveMed() {
                 '                    <span> - ' + data.rate + '</span>' +
                 '                    <span id="\'sm\'+' + data.medicamentId + '" style="display: none">' + data.info + '</span>' +
                 '                </div>';
-            let medDiv = $("#med_div");
+            let medDiv = $("#med_div")[0];
             medDiv.html(medDiv.html, arr.join(''));
             medSelect.value = null;
             medRate.value = null;
