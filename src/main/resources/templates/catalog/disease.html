@@ -9,6 +9,11 @@
     <title>Title</title>
 </head>
 <body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    diseaseId = /*[[${disease.diseaseId}]]*/ 0;
+    /*]]>*/
+</script>
 <div th:insert="header.html :: header-fragment"></div>
 <div class="main">
     <br><br><br>
@@ -25,41 +30,47 @@
         </div>
         <div style="display: flex">
 
-            <div class="row" style="min-width: 50%">
+            <div id="sym_div" class="row" style="min-width: 50%">
                 <img id="sym_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewSym()">
                 <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
                      onclick="swapVisibility('s'+this.id)">
                     <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small sym_minus" style="display:none" th:onclick="'deleteSym('+${item.symptomId}+')'">
+                         class="round_extra_small sym_minus" style="display:none"
+                         th:onclick="'deleteSym('+${item.symptomId}+')'">
                     <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
-                       style="text-decoration: none; color: #4443fc"></span>
+                          style="text-decoration: none; color: #4443fc"></span>
                     <span th:text="' - '+ ${item.rate}"></span>
                     <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
                 </div>
-                <div>
-                    <select id="sym_select" style="display:none;"></select>
+                <div style="display: inline">
+                    <select id="sym_select" style="display:none"></select>
                     <span id="sym_span" style="display: none">-</span>
                     <input id="sym_rate" type="number" style="display: none">
+                    <p id="sym_error" style="display: none; color: #ff4e3f">Неверные данные</p>
+                    <button id="sym_save_button" onclick="saveSymptom()">Сохранить</button>
                 </div>
             </div>
 
-            <div class="row" style="min-width: 50%">
+            <div id="med_div" class="row" style="min-width: 50%">
                 <img id="med_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewMed()">
                 <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
                      onclick="swapVisibility('s'+this.id)">
                     <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small med_minus" style="display:none" th:onclick="'deleteMed('+${item.medicamentId}+')'">
+                         class="round_extra_small med_minus" style="display:none"
+                         th:onclick="'deleteMed('+${item.medicamentId}+')'">
                     <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
                           style="text-decoration: none; color: #4443fc"></span>
                     <span th:text="' - '+ ${item.rate}"></span>
                     <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
                 </div>
-                <div style="display:inline;">
+                <div style="display:inline">
                     <select id="med_select" style="display:none"></select>
                     <span id="med_span" style="display: none">-</span>
                     <input id="med_rate" type="number" style="display: none">
+                    <p id="med_error" style="display: none; color: #ff4e3f">Неверные данные</p>
+                    <button id="med_save_button" onclick="saveMed()">Сохранить</button>
                 </div>
             </div>
 

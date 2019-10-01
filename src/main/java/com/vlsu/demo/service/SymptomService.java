@@ -6,6 +6,7 @@ import com.vlsu.demo.model.repository.SymptomRepository;
 import com.vlsu.demo.model.restObject.SymptomWithDiseases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,25 +29,25 @@ public class SymptomService {
     }
 
     public List<Symptom> getAll() {
-      return symptomRepository.findAll();
+        return symptomRepository.findAll();
     }
 
     public List<String> getAllInfo() {
-        TypedQuery<String> query = em.createQuery("SELECT s.info from Symptom s",String.class);
+        TypedQuery<String> query = em.createQuery("SELECT s.info from Symptom s", String.class);
         return query.getResultList();
     }
 
-    public List<Symptom> getAllInIdList(List<Integer> ids){
+    public List<Symptom> getAllInIdList(List<Integer> ids) {
         return symptomRepository.findAllBySymptomIdIsIn(ids);
     }
 
-    public List<SymptomWithDiseases> getAllCommonInfo(){
+    public List<SymptomWithDiseases> getAllCommonInfo() {
         Query symptomQuery = em.createQuery("select s from Symptom s");
         List symptomList = symptomQuery.getResultList();
         Query diseaseQuery = em.createQuery("select d, ds.symptomId from Disease d " +
                 "inner join DiseaseSymptom ds on ds.diseaseId = d.diseaseId");
         List diseaseList = diseaseQuery.getResultList();
-        return mapToSymptomWithDiseases(symptomList,diseaseList);
+        return mapToSymptomWithDiseases(symptomList, diseaseList);
     }
 
     private List<SymptomWithDiseases> mapToSymptomWithDiseases(List symptomList, List diseaseList) {
@@ -67,6 +68,15 @@ public class SymptomService {
             ));
         }
         return result;
+    }
+
+    @Transactional
+    public void deleteSymptomFromDisease(int diseaseId, int symptomId) {
+        Query query = em.createQuery("delete from DiseaseSymptom ds " +
+                "where ds.diseaseId=:diseaseId and ds.symptomId=:symptomId");
+        query.setParameter("diseaseId", diseaseId);
+        query.setParameter("symptomId", symptomId);
+        query.executeUpdate();
     }
 
 }

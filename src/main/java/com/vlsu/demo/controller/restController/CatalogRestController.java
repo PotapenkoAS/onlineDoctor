@@ -2,12 +2,11 @@ package com.vlsu.demo.controller.restController;
 
 import com.vlsu.demo.model.entity.Medicament;
 import com.vlsu.demo.model.entity.Symptom;
+import com.vlsu.demo.model.restObject.SymptomWithRate;
 import com.vlsu.demo.service.MedicamentService;
 import com.vlsu.demo.service.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -24,15 +23,30 @@ public class CatalogRestController {
         this.medicamentService = medicamentService;
     }
 
-    @GetMapping("/get_symptoms")
+    @GetMapping("/symptoms")
     public Collection<Symptom> getSymptoms() {
         return symptomService.getAll();
     }
 
-    @GetMapping("/get_meds")
+    @GetMapping("/meds")
     public Collection<Medicament> getMedicaments() {
         return medicamentService.getAll();
     }
 
-    //TODO delete methods for symptoms and meds
+    @DeleteMapping("/med")
+    public void deleteMedicament(int diseaseId, int medicamentId) {
+        medicamentService.deleteMedicamentFromDisease(diseaseId, medicamentId);
+    }
+
+    @DeleteMapping("/symptom")
+    public void deleteSymptom(int diseaseId, int symptomId) {
+        symptomService.deleteSymptomFromDisease(diseaseId, symptomId);
+    }
+
+    @PostMapping("/symptom")
+    public SymptomWithRate saveSymptom(int symptomId, double rate){
+        return null;
+        //todo
+    }
+    //todo save medicament
 }

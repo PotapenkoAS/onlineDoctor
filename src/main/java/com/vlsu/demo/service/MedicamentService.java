@@ -8,6 +8,7 @@ import com.vlsu.demo.model.restObject.MedsWithDiseases;
 import com.vlsu.demo.model.restObject.SymptomWithDiseases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,7 +43,7 @@ public class MedicamentService {
         return mapToMedsWithDiseases(medList, diseaseList);
     }
 
-    private List<MedsWithDiseases> mapToMedsWithDiseases(List medList, List diseaseList){
+    private List<MedsWithDiseases> mapToMedsWithDiseases(List medList, List diseaseList) {
         ArrayList<MedsWithDiseases> result = new ArrayList<>();
         for (Object o : medList) {
             int medicamentId = ((Medicament) o).getMedicamentId();
@@ -60,5 +61,14 @@ public class MedicamentService {
             ));
         }
         return result;
+    }
+
+    @Transactional
+    public void deleteMedicamentFromDisease(int diseaseId, int medicamentId) {
+        Query query = em.createQuery("delete from DiseaseMed dm " +
+                "where dm.diseaseId=:diseaseId and dm.medicamentId=:medicamentId");
+        query.setParameter("diseaseId", diseaseId);
+        query.setParameter("medicamentId", medicamentId);
+        query.executeUpdate();
     }
 }
