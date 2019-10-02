@@ -57,22 +57,22 @@ function updateBodyMass(height, weight) {
         color = 'red';
     }else if(indexValue>16 && indexValue<=18.5){
         indexText = 'Недостаточная масса тела';
-        color = 'yellow';
+        color = 'orange';
     }else if(indexValue>18.5 && indexValue<=24.99){
         indexText = 'Норма';
         color = 'green'
     }else if(indexValue>24.99 && indexValue<=30){
         indexText = 'Избыточная масса тела(предожирение)';
-        color = 'yellow';
+        color = 'orange';
     }else if(indexValue>30 && indexValue<=35){
         indexText = 'Ожирение';
-        color = 'pink';
+        color = 'red';
     }else if(indexValue>35 && indexValue<=40){
         indexText = 'Ожирение резкое';
         color = 'red';
     }else if(indexValue>40 ){
         indexText = 'Очень резкое ожирение';
-        color = 'darkred';
+        color = 'red';
     }
     bodyMass.innerText = indexValue + ' - ' + indexText;
     bodyMass.style.color = color;
