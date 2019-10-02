@@ -30,21 +30,23 @@
         </div>
         <div style="display: flex">
 
-            <div id="sym_div" class="row" style="min-width: 49%; padding: 15px">
+            <div class="row" style="min-width: 49%; padding: 15px">
                 <div style="text-align: center;"><h2>Симптомы</h2></div>
                 <img id="sym_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewSym()">
-                <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
-                     onclick="swapVisibility('s'+this.id)">
-                    <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small sym_minus" style="display:none; float: left"
-                         th:onclick="'deleteSym('+${item.symptomId}+')'">
-                    <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
-                          style="text-decoration: none; color: #4443fc"></span>
-                    <span th:text="' - '+ ${item.rate}"></span>
-                    <span th:if="${item.isMandatory()==0}"><br>Обязательный</span>
-                    <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
-                    <hr>
+                <div id="sym_div">
+                    <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
+                         onclick="swapVisibility('s'+this.id)">
+                        <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
+                             class="round_extra_small sym_minus" style="display:none; float: left"
+                             th:onclick="'deleteSym('+${item.symptomId}+')'">
+                        <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
+                              style="text-decoration: none; color: #4443fc"></span>
+                        <span th:text="' - '+ ${item.rate}"></span>
+                        <span th:if="${item.isMandatory()==0}"><br>Обязательный</span>
+                        <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
+                        <hr>
+                    </div>
                 </div>
                 <div style="display: flex">
                     <select id="sym_select" style="display:none" onchange="hideSymError()"></select>
@@ -58,20 +60,22 @@
 
             <div class="rowT" style="min-width: 2%"></div>
 
-            <div id="med_div" class="row" style="min-width: 49%; padding: 15px">
+            <div class="row" style="min-width: 49%; padding: 15px">
                 <div style="text-align: center"><h2>Лекарства</h2></div>
                 <img id="med_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
                      class="round_extra_small" style="display: none" onclick="showNewMed()">
-                <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
-                     onclick="swapVisibility('s'+this.id)">
-                    <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
-                         class="round_extra_small med_minus" style="display:none; float: left"
-                         th:onclick="'deleteMed('+${item.medicamentId}+')'">
-                    <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
-                          style="text-decoration: none; color: #4443fc"></span>
-                    <span th:text="' - '+ ${item.rate}"></span>
-                    <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
-                    <hr>
+                <div id="med_div">
+                    <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
+                         onclick="swapVisibility('s'+this.id)">
+                        <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
+                             class="round_extra_small med_minus" style="display:none; float: left"
+                             th:onclick="'deleteMed('+${item.medicamentId}+')'">
+                        <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
+                              style="text-decoration: none; color: #4443fc"></span>
+                        <span th:text="' - '+ ${item.rate}"></span>
+                        <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
+                        <hr>
+                    </div>
                 </div>
                 <div style="display:flex">
                     <select id="med_select" style="display:none" onchange="hideMedError()"></select>
@@ -80,6 +84,7 @@
                     <p id="med_error" style="display: none; color: #ff4e3f">Неверные данные</p>
                     <button id="med_save_button" onclick="saveMed()" style="display:none">Сохранить</button>
                 </div>
+
             </div>
 
         </div>
