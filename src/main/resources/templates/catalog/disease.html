@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <link href="/content/style.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="/scripts/catalog.js"></script>
     <title>Disease</title>
 </head>
 <body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    diseaseId = /*[[${disease.diseaseId}]]*/ 0;
+    /*]]>*/
+</script>
 <div th:insert="header.html :: header-fragment"></div>
 <div class="main">
     <br><br>
@@ -14,37 +21,69 @@
         <div class="row">
             <div style="padding: 15px">
                 <h2 th:text="${disease.name}"></h2>
+                <img sec:authorize="hasRole('ADMIN')" class="round_super_small"
+                     src="http://download.seaicons.com/icons/dtafalonso/android-l/512/Settings-L-icon.png"
+                     alt="Редактировать"
+                     onclick="editor()">
                 <p th:text="${disease.info}"></p>
             </div>
         </div>
         <div style="display: flex">
-            <div class="row" style="min-width: 49%">
+
+            <div id="sym_div" class="row" style="min-width: 49%; padding: 15px">
                 <div style="text-align: center;"><h2>Симптомы</h2></div>
-                <div style="padding: 15px">
-                    <div th:each="item:${disease.symptomWithRateList}"
-                         th:onclick="'swapVisibility(\'s'+ ${item.symptomId} +'\')'">
-                        <a th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
-                           style="text-decoration: none; color: #4443fc"></a>
-                        <span th:text="' - '+ ${item.rate}"></span>
-                        <span th:id="'s'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
-                    </div></div>
+                <img id="sym_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
+                     class="round_extra_small" style="display: none" onclick="showNewSym()">
+                <div th:each="item:${disease.symptomWithRateList}" th:id="'s'+${item.symptomId}"
+                     onclick="swapVisibility('s'+this.id)">
+                    <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
+                         class="round_extra_small sym_minus" style="display:none; float: left"
+                         th:onclick="'deleteSym('+${item.symptomId}+')'">
+                    <span th:href="'/symptom/'+${item.symptomId}" th:text="${item.name}"
+                          style="text-decoration: none; color: #4443fc"></span>
+                    <span th:text="' - '+ ${item.rate}"></span>
+                    <span th:if="${item.isMandatory()==0}"><br>Обязательный</span>
+                    <span th:id="'ss'+${item.symptomId}" th:text="${item.info}" style="display: none"></span>
+                    <hr>
+                </div>
+                <div style="display: flex">
+                    <select id="sym_select" style="display:none" onchange="hideSymError()"></select>
+                    <span id="sym_span" style="display: none">-</span>
+                    <input id="sym_rate" type="number" style="display: none" onchange="hideSymError()">
+                    <input id="sym_man" type="checkbox" style="display:none">
+                    <p id="sym_error" style="display: none; color: #ff4e3f">Неверные данные</p>
+                    <button id="sym_save_button" onclick="saveSymptom()" style="display:none">Сохранить</button>
+                </div>
             </div>
 
             <div class="rowT" style="min-width: 2%"></div>
-            <div class="row" style="min-width: 49%">
-                <div style="text-align: center;"><h2>Лекарства</h2></div>
-                <div style="padding: 15px">
-                    <div th:each="item:${disease.medicamentWithRateList}"
-                         th:onclick="'swapVisibility(\'m'+${item.medicamentId}+'\')'">
+
+            <div id="med_div" class="row" style="min-width: 49%; padding: 15px">
+                <div style="text-align: center"><h2>Лекарства</h2></div>
+                <img id="med_plus" src="https://image.flaticon.com/icons/png/512/36/36962.png" alt="Добавить"
+                     class="round_extra_small" style="display: none" onclick="showNewMed()">
+                <div th:each="item:${disease.medicamentWithRateList}" th:id="'m'+${item.medicamentId}"
+                     onclick="swapVisibility('s'+this.id)">
+                    <img src="https://image.flaticon.com/icons/png/512/54/54601.png" alt="Удалить"
+                         class="round_extra_small med_minus" style="display:none; float: left"
+                         th:onclick="'deleteMed('+${item.medicamentId}+')'">
                     <span th:href="'/medicament/'+${item.medicamentId}" th:text="${item.name}"
                           style="text-decoration: none; color: #4443fc"></span>
-                        <span th:text="' - '+ ${item.rate}"></span>
-                        <span th:id="'m'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
-                    </div></div>
+                    <span th:text="' - '+ ${item.rate}"></span>
+                    <span th:id="'sm'+${item.medicamentId}" th:text="${item.info}" style="display: none"></span>
+                    <hr>
+                </div>
+                <div style="display:flex">
+                    <select id="med_select" style="display:none" onchange="hideMedError()"></select>
+                    <span id="med_span" style="display: none">-</span>
+                    <input id="med_rate" type="number" style="display: none" onchange="hideMedError()">
+                    <p id="med_error" style="display: none; color: #ff4e3f">Неверные данные</p>
+                    <button id="med_save_button" onclick="saveMed()" style="display:none">Сохранить</button>
+                </div>
             </div>
+
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
