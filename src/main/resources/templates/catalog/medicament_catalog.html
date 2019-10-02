@@ -10,20 +10,22 @@
 <body>
 <div th:insert="header.html :: header-fragment"></div><br>
 <div class="main">
-    <br><br><br>
+    <br><br>
     <div class="containerTest">
         <div class="row">
-            <div th:each="item:${meds}" th:id="${item.medicamentId}" onclick="swapVisibility('i'+this.id)">
-                Название:
-                <a th:text="${item.medicamentName}" th:href="'/medicament/'+${item.medicamentId}"
-                   style="text-decoration: none; color: #4443fc"></a>
-                <p th:text="'Описание: '+${item.medicamentInfo}"></p>
-                <div th:id="'i'+${item.medicamentId}">
-                    <p>Болезни: </p>
-                    <a th:each="disease:${item.diseaseList}" th:text="${disease.name} + '; '"
-                       th:href="'/disease/'+${disease.diseaseId}" style="text-decoration: none; color: #4443fc"></a>
+            <div style="padding: 15px">
+                <div th:each="item:${meds}" th:id="${item.medicamentId}" onclick="swapVisibility('i'+this.id)">
+                    Название:
+                    <a th:text="${item.medicamentName}" th:href="'/medicament/'+${item.medicamentId}"
+                       style="text-decoration: none; color: #4443fc"></a>
+                    <p th:text="'Описание: '+${item.medicamentInfo}"></p>
+                    <div th:id="'i'+${item.medicamentId}">
+                        <p>Болезни: </p>
+                        <a th:each="disease:${item.diseaseList}" th:text="${disease.name} + '; '"
+                           th:href="'/disease/'+${disease.diseaseId}" style="text-decoration: none; color: #4443fc"></a>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
             </div>
         </div>
     </div>
