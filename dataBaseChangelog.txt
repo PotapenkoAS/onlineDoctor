@@ -44,3 +44,6 @@ create table test_symptom
 
 
 alter table user modify login varchar(255) collate utf8mb4_0900_as_cs not null;
+
+
+drop index user_password_uindex on user;
