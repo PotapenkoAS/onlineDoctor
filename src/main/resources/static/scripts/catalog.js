@@ -68,6 +68,9 @@ function editor() {
                 dataType: "JSON",
                 success: function (data) {
                     let symSelect = $("#sym_select")[0];
+                    for (let i = symSelect.options.length; i >= 0; i--) {
+                        symSelect.options.remove(i);
+                    }
                     for (let i = 0; i < data.length; i++) {
                         symSelect.options.add(new Option(data[i].name, data[i].symptomId));
                     }
@@ -81,6 +84,9 @@ function editor() {
                 dataType: "JSON",
                 success: function (data) {
                     let medSelect = $("#med_select")[0];
+                    for (let i = medSelect.options.length; i >= 0; i--) {
+                        medSelect.options.remove(i);
+                    }
                     for (let i = 0; i < data.length; i++) {
                         medSelect.options.add(new Option(data[i].name, data[i].medicamentId));
                     }
