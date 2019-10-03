@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:display="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link href="/content/style.css" rel="stylesheet">
@@ -17,7 +17,7 @@
                 <a th:text="${item.diseaseName}" th:href="'/disease/'+${item.diseaseId}"
                    style="text-decoration: none; color: #4443fc"></a>
                 <p th:text="'Описание: '+${item.diseaseInfo}"></p>
-                <div th:id="'i'+${item.diseaseId}">
+                <div th:id="'i'+${item.diseaseId} " style="display: none">
                     <p th:if="${!item.symptomList.isEmpty()}">Симптомы: </p>
                     <a th:each="symptom:${item.symptomList}" th:text="${symptom.name} + '; '"
                        th:href="'/symptom/'+${symptom.symptomId}" style="text-decoration: none; color: #4443fc"></a>
